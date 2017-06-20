@@ -1,0 +1,363 @@
+package com.Activity;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.json.JSONObject;
+import org.xutils.x;
+
+import com.Activity.R.string;
+import com.Adapter.ActivityMyShoppingadapter;
+import com.Adapter.Activitymysettingadapter;
+import com.Bll.CBLL;
+import com.Entity.Car;
+import com.Entity.CarSet;
+import com.Entity.HomeEntity;
+import com.Entity.Merchant;
+import com.Entity.UserEntity;
+import com.Http.HttpCallback;
+import com.Http.HttpTask;
+import com.tool.JSONEntity;
+import com.tool.MyURL;
+import com.tool.SPUtils;
+import com.tool.ToastUtil;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
+
+public class MyCarSetting extends Activity{
+  private TextView tv_carnumber,tv_carnum,tv_carname,tv_boxnumber;
+  private RelativeLayout rel_changenumber,rel_qichepeizhi,rel_buy_dangan,rel_zhinenghezi,rel_tiajanche;
+
+  private ImageView img_tianjia2,img_bac,img_delete;
+
+  private LinearLayout lin_back;
+  private ImageView img_tianjia;
+
+  private PopupWindow popupview; 
+  private CarSet carset;
+  
+  private Activitymysettingadapter activityadapter;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.activity_mycarsetting);
+       // Data();
+        initview();
+        ReastDate();
+        setListen();
+        
+	}
+@SuppressWarnings("unchecked")
+private void ReastDate() {
+		// TODO Auto-generated method stub
+	HashMap<String, String> idtakjson = new UserEntity()
+	.getIdTaken(MyCarSetting.this);
+	//获取车辆列表
+	new HttpTask(carlistCallback, MyURL.CARLIST).execute(idtakjson);
+	
+	int carid=(Integer) SPUtils.get(MyCarSetting.this,"carId", -1);
+	idtakjson.put("car_id", carid+"");
+	//获取汽车设置数据
+	new HttpTask(carsettingcallback, MyURL.CARSETTINGDATA).execute(idtakjson);
+	
+	}
+
+
+private HttpCallback carsettingcallback=new HttpCallback() {
+
+	
+	@Override
+	public void getResult(JSONObject json) {
+		// TODO Auto-generated method stub
+		CBLL cBllUser = CBLL.getInstance();
+		JSONEntity entity = cBllUser.json2carsetting(json);
+		if(entity.isFlag()){
+		Car car=(Car) entity.getData();
+		tv_carnumber.setText(car.getCar_num());
+		tv_carnum.setText(car.getCar_num());
+		tv_carname.setText(car.getBrand_name()+car.getArctic_name());
+		tv_boxnumber.setText(car.getBox_sn());
+		SPUtils.put(MyCarSetting.this,"carId", car.getCar_id());
+		SPUtils.put(MyCarSetting.this,"carnumber", car.getCar_num());
+		
+		}else {
+			if (entity.getMessage() == MyURL.MSG_OTHERS_ERROR) {
+				ToastUtil.show(MyCarSetting.this, "获取失败");
+			} else if (entity.getMessage() == MyURL.MSG_TOKENS_ERROR) {
+				ToastUtil.show(MyCarSetting.this, "您的账号在别的地方登陆，请重新登录");
+				// 重启app
+				restartApplication();
+			}
+		}
+	}
+};
+ 
+ HttpCallback carlistCallback=new HttpCallback() {
+	
+	@Override
+	public void getResult(JSONObject json) {
+		// TODO Auto-generated method stub
+		CBLL cBllUser = CBLL.getInstance();
+		JSONEntity entity = cBllUser.json2carlistmy(json);
+		if (entity.isFlag()) {
+			carset = (CarSet) entity.getData();
+			
+		} else {
+			if (entity.getMessage() == MyURL.MSG_OTHERS_ERROR) {
+				ToastUtil.show(MyCarSetting.this, "获取失败");
+			} else if (entity.getMessage() == MyURL.MSG_TOKENS_ERROR) {
+				ToastUtil.show(MyCarSetting.this, "您的账号在别的地方登陆，请重新登录");
+				// 重启app
+				restartApplication();
+			}
+		}
+	}
+};
+
+private HttpCallback homeCallback = new HttpCallback() {
+
+	@Override
+	public void getResult(JSONObject json) {
+		//切换车以后
+		
+	}
+};
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+
+		switch (requestCode) {	
+		case 2:			
+			if (resultCode==2) {
+				if(!data.getStringExtra("carnumber").isEmpty()){
+				tv_carnumber.setText(data.getStringExtra("str")+data.getStringExtra("carnumber"));
+				
+			}
+				}
+		case 3:
+			if (resultCode == RESULT_OK) {
+				//将返回来的值进行处理
+			String carnum=data.getStringExtra("city")+data.getStringExtra("carnumber");
+			String carbrands=data.getStringExtra("carbrands");
+			String arctic_name=data.getStringExtra("arctic_name");
+			String gearbox=data.getStringExtra("tag");
+			String displacement=data.getStringExtra("displacement");
+		 HashMap<String, String> getinsurancedate = new Car().addnewcar
+		 (MyCarSetting.this,carnum,carbrands,arctic_name,gearbox,displacement);
+		//new HttpTask(addnewcarcallback,MyURL/).execute(getinsurancedate);
+				}
+			break;
+		default:
+		}
+	}
+	HttpCallback addnewcarcallback=new HttpCallback() {
+		
+		@Override
+		public void getResult(JSONObject json) {
+			// TODO Auto-generated method stub
+			CBLL cbll=CBLL.getInstance();
+	        JSONEntity entity=cbll.json2carlistmy(json);
+	        if(entity.isFlag()){
+	        	//ss
+	        }
+		}
+	};
+	 /*** 
+     * 获取PopupWindow实例 
+     */  
+    private void getPopupWindow() {  
+        if (null != popupview) {    
+        	popupview.dismiss();  
+        	popupview = null; 
+            return;  
+        } else {  
+            initPopuptWindow();  
+            
+        }  
+    }  
+    
+	//初始化popupwindow
+	protected void initPopuptWindow(){
+		View view = getLayoutInflater().inflate(R.layout.popupview_shop, null,  
+                false);  
+		ListView listview=(ListView) view.findViewById(R.id.listview);
+		 
+		List<Car> l = new ArrayList<Car>();
+		for (int i = 0; i < carset.getSize(); i++) {
+			l.add(new Car(carset.getItem(i).getBrand_logo(),carset.getItem(i).getCar_num()));
+		}
+	    CarSet list=new CarSet(l);
+		activityadapter = new Activitymysettingadapter(MyCarSetting.this, list);
+		
+		listview.setAdapter(activityadapter);
+		
+		listview.setOnItemClickListener(new OnItemClickListener() {
+
+			@SuppressWarnings("unchecked")
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				tv_carnumber.setText(carset.getItem(position).getCar_num());
+				String carid = carset.getItem(position).getCar_id() + "";
+				HashMap<String, String> idtakjson = new UserEntity()
+				.getIdTaken(MyCarSetting.this);
+				idtakjson.put("car_id", carid); 
+				new HttpTask(carsettingcallback, MyURL.CARSETTINGCHANGECAR).execute(idtakjson);
+				setResult(1);
+				//用于消失弹窗
+				getPopupWindow(); 
+			}
+		});
+		
+		popupview=new PopupWindow(view,ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+		//popupview.setBackgroundDrawable(getResources().getDrawable(R.drawable.popupgray));
+		popupview.setAnimationStyle(android.R.style.Animation_InputMethod);
+		//点击外面，窗口消失
+		popupview.setOutsideTouchable(true);
+		popupview.setFocusable(true);
+		popupview.setTouchable(true);
+		//防止软键盘被弹出菜单遮住
+		popupview.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+		view.setOnTouchListener(new OnTouchListener() {  
+            @Override  
+            public boolean onTouch(View v, MotionEvent event) {  
+                // TODO Auto-generated method stub  
+                if (popupview != null && popupview.isShowing()) {  
+                	//tv_changecar.setVisibility(View.VISIBLE);
+                	popupview.dismiss();  
+                	popupview = null;  
+                	
+                }  
+                return false;  
+            }  
+        }); 
+		
+	}
+    
+	private void setListen() {
+		// TODO Auto-generated method stub
+		
+		rel_tiajanche.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				 getPopupWindow();  
+		            // 这里是位置显示方式,
+		         popupview.showAsDropDown(rel_tiajanche);
+			}
+		});
+		rel_zhinenghezi.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent=new Intent(MyCarSetting.this,IntelligentBoxManage.class);
+				startActivity(intent);
+			}
+		});
+		rel_qichepeizhi.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent=new Intent(MyCarSetting.this,CarConfiguration.class);
+				startActivity(intent);
+			}
+		});
+		rel_changenumber.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+				Intent intent = new Intent(MyCarSetting.this,ChangeCarNumberActivity.class);
+				startActivityForResult(intent, 2);
+			}
+		});
+		rel_buy_dangan.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent=new Intent(MyCarSetting.this,PurchaseRecordActivity.class);
+				startActivity(intent);
+			}
+		});
+		
+		img_tianjia.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(MyCarSetting.this,
+						AddLicenseplateActivity.class);
+				startActivityForResult(intent, 3);
+			}
+		});
+		lin_back.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+			finish();	
+			}
+		});
+		
+		img_delete.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+				
+			}
+		});
+		
+	}
+	private void initview() {
+		// TODO Auto-generated method stub
+		tv_boxnumber=(TextView) findViewById(R.id.tv_boxnumber);
+		tv_carname=(TextView) findViewById(R.id.tv_carname);
+		tv_carnum=(TextView) findViewById(R.id.tv_carnum);
+		rel_tiajanche=(RelativeLayout)findViewById(R.id.rel_tiajanche);//上一活动的下拉菜单
+		img_tianjia=(ImageView)findViewById(R.id.img_tianjia);
+		rel_buy_dangan=(RelativeLayout)findViewById(R.id.rel_buy_dangan);
+		rel_changenumber=(RelativeLayout)findViewById(R.id.rel_changenumber);
+		tv_carnumber=(TextView)findViewById(R.id.tv_carnumber);
+		rel_qichepeizhi=(RelativeLayout)findViewById(R.id.rel_qichepeizhi);
+		rel_zhinenghezi=(RelativeLayout)findViewById(R.id.rel_zhinenghezi);
+		lin_back=(LinearLayout) findViewById(R.id.lin_back);
+		img_delete=(ImageView) findViewById(R.id.img_delete);
+		
+	}
+	// 重启app
+	private void restartApplication() {
+		final Intent intent = getPackageManager().getLaunchIntentForPackage(
+				getPackageName());
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(intent);
+	}
+}

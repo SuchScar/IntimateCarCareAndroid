@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@color/white">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp" >
+
+        <LinearLayout
+            android:id="@+id/lin_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/back_orange" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/historycarreport"
+                android:textColor="@color/orangelight"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/linegray" 
+        />
+   <com.handmark.pulltorefresh.library.PullToRefreshListView  
+        xmlns:ptr="http://schemas.android.com/apk/res-auto"  
+        android:id="@+id/refreshlistview"  
+        android:layout_width="match_parent"  
+        android:layout_height="match_parent"  
+        ptr:ptrDrawable="@drawable/default_ptr_flip"   
+        ptr:ptrAnimationStyle="flip"  
+        ptr:ptrHeaderBackground="@color/white"  
+        ptr:ptrHeaderTextColor="@color/textgraydark" 
+        />
+    
+
+</LinearLayout>

@@ -1,0 +1,94 @@
+package com.Adapter;
+
+import org.xutils.x;
+
+import com.Activity.R;
+import com.Adapter.ActivityMyWeatherAdapter.ViewHolder;
+import com.Entity.Merchant;
+import com.Entity.MerchantSet;
+import com.tool.MyURL;
+import com.tool.SPUtils;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class ActivityMyShoppingadapter  extends BaseAdapter{
+  
+	private Context context;
+	private MerchantSet list;
+	
+	public ActivityMyShoppingadapter(Context c,MerchantSet l){
+		super();
+		context=c;
+		list =l;
+	}
+	
+	class ViewHolder{
+		TextView tv_shangjianame;
+		ImageView shangjia_image;
+		TextView call_shangjia;
+		TextView shangjia_address;
+	
+	}
+	@Override
+	public int getCount() {
+		// TODO Auto-generated method stub
+		return list.getSize();
+	}
+
+	@Override
+	public Object getItem(int position) {
+		// TODO Auto-generated method stub
+		return list.getItem(position);
+	}
+
+	@Override
+	public long getItemId(int position) {
+		// TODO Auto-generated method stub
+		return position;
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		// TODO Auto-generated method stub
+		ViewHolder viewholder;
+		
+	if(convertView==null){
+			
+	convertView = LayoutInflater.from(context).inflate(R.layout.item_myshoppingadapter, null);
+	viewholder = new ViewHolder();
+	
+	viewholder.tv_shangjianame=(TextView)convertView.findViewById(R.id.tv_shangjianame);
+	viewholder.shangjia_image=(ImageView)convertView.findViewById(R.id.shangjia_image);
+	viewholder.shangjia_address=(TextView)convertView.findViewById(R.id.shangjia_address);
+	viewholder.call_shangjia=(TextView)convertView.findViewById(R.id.call_shangjia);
+	convertView.setTag(viewholder);
+	
+		}
+	
+	else{
+		viewholder = (ViewHolder) convertView.getTag();
+	}
+	if(!list.getItem(position).getPictures().getUrl().equals("null")){
+		x.image().bind(viewholder.shangjia_image, list.getItem(position).getPictures().getUrl());
+		
+	}else{
+		viewholder.shangjia_image.setImageResource(R.drawable.shangpin_image);
+	}
+	
+	
+	viewholder.tv_shangjianame.setText(list.getItem(position).getName());
+	viewholder.shangjia_address.setText((list.getItem(position).getAddress()));
+	viewholder.call_shangjia.setText(list.getItem(position).getTel());
+
+		
+	return convertView;
+		
+	}
+
+}

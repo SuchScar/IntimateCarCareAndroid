@@ -1,0 +1,197 @@
+package com.Activity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.Adapter.Activityaddlicenseplatedapter;
+import com.Entity.Arctic;
+import com.Entity.ArcticSet;
+import com.Entity.Car;
+import com.Entity.CarSet;
+import com.tool.ToastUtil;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+public class ChangeCarConfiguration extends Activity {
+	private Spinner Spinneraa;
+	private ListView list2;
+	private Activityaddlicenseplatedapter caradapter;
+	private RelativeLayout rel_chepinpai,car_type,rel_vin;
+	private TextView tv_chepinpai,tv_cartype,tv_shoudong,tv_zidong;
+	boolean visibility_Flag = false;
+	private CarSet listdate;
+	private ImageView img_3,img_4,img_allcommit,img_back2;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.activity_changecarconfiguration);
+		getData();
+		initview();
+		setListen();
+		
+		String[] mItems = getResources().getStringArray(R.array.spingarr);
+		ArrayAdapter<String> Adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item, mItems);
+		Spinneraa.setAdapter(Adapter);
+	}
+	
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+
+		switch (requestCode) {
+		case 2:
+			if (resultCode == RESULT_OK) {
+				tv_chepinpai.setText(data.getStringExtra("carname"));
+			}
+			break;
+		default:
+		}
+	}
+
+	private void getData() {
+		// TODO Auto-generated method stub
+		List<Car> l = new ArrayList<Car>();
+		l.add(new Car("宝马MAX6",2));
+		l.add(new Car("宝马MAX7",2));
+		l.add(new Car("宝马MIX2",2));
+		l.add(new Car("宝马MIX3",2));
+		listdate = new CarSet(l);
+	}
+	
+	private void setListen() {
+		// TODO Auto-generated method stub
+		
+		list2.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				tv_cartype.setText(listdate.getItem(arg2).getArctic_name());
+				list2.setVisibility(View.GONE);
+				visibility_Flag = true;
+				img_4.setVisibility(View.VISIBLE);
+				img_3.setVisibility(View.GONE);
+			}
+		});
+		car_type.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+
+				// TODO Auto-generated method stub
+
+				// TODO Auto-generated method stub
+				if (!tv_chepinpai.getText().toString().equals("")) {
+					if (visibility_Flag) {
+						caradapter = new Activityaddlicenseplatedapter(
+								ChangeCarConfiguration.this, listdate);
+						list2.setAdapter(caradapter);
+						list2.setVisibility(View.VISIBLE);
+						visibility_Flag = false;
+						img_4.setVisibility(View.GONE);
+						img_3.setVisibility(View.VISIBLE);
+					} else {
+						list2.setVisibility(View.GONE);
+						visibility_Flag = true;
+						img_4.setVisibility(View.VISIBLE);
+						img_3.setVisibility(View.GONE);
+					}
+				} else {
+					ToastUtil.show(ChangeCarConfiguration.this, "请选择车的品牌");
+				}
+				
+			}
+		});
+		img_back2.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+			finish();	
+			}
+		});
+		rel_chepinpai.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(ChangeCarConfiguration.this,
+						AllCarClassify.class);
+				startActivityForResult(intent, 2);
+			}
+		});
+		tv_zidong.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				tv_shoudong.setBackgroundColor(android.graphics.Color.GRAY);
+				tv_zidong.setBackgroundColor(android.graphics.Color.YELLOW);
+			}
+		});
+		tv_shoudong.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				tv_shoudong.setBackgroundColor(android.graphics.Color.YELLOW);
+				tv_zidong.setBackgroundColor(android.graphics.Color.GRAY);
+			}
+		});
+		img_allcommit.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				finish();
+				
+			}
+		});
+		rel_vin.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent=new Intent(ChangeCarConfiguration.this,VINnumberActivity.class);
+			startActivity(intent);
+			}
+		});
+	}
+	private void initview() {
+		// TODO Auto-generated method stub
+		rel_vin=(RelativeLayout)findViewById(R.id.rel_vin);
+		tv_zidong=(TextView)findViewById(R.id.tv_zidong);
+		tv_shoudong=(TextView)findViewById(R.id.tv_shoudong);
+		list2 = (ListView) findViewById(R.id.list_carxing);
+		img_3=(ImageView)findViewById(R.id.img_3);
+	    img_4=(ImageView)findViewById(R.id.img_4);
+		car_type=(RelativeLayout)findViewById(R.id.car_type);
+		rel_chepinpai=(RelativeLayout)findViewById(R.id.rel_chepinpai);
+		tv_chepinpai=(TextView)findViewById(R.id.tv_chepinpai);
+		tv_cartype=(TextView)findViewById(R.id.tv_cartype);
+		Spinneraa = (Spinner) findViewById(R.id.Spinneraa);
+		img_allcommit=(ImageView)findViewById(R.id.img_allcommit);
+		img_back2=(ImageView)findViewById(R.id.img_back2);
+	}
+
+}

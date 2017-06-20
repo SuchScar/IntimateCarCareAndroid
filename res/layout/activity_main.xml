@@ -1,0 +1,454 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res/com.IntimateCarCare"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <!-- 天气布局 -->
+
+    <LinearLayout
+        android:id="@+id/lin_weather"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="54"
+        android:background="@color/white" >
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3" >
+     <ImageView 
+         android:id="@+id/img_weather"
+         android:layout_width="20dp"
+         android:layout_height="20dp"
+         android:src="@drawable/dayu"
+         android:layout_marginLeft="4dp"
+        android:layout_centerVertical="true"
+         />
+            <TextView
+                android:id="@+id/temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="20~23℃"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="0.1dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/black" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2" >
+
+            <TextView
+                android:id="@+id/carwash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="宜洗车"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="0.1dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/black" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3" >
+
+            <TextView
+                android:id="@+id/trafficlimit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="今日双号  不限行"
+                android:textSize="14sp" />
+        </RelativeLayout>
+    </LinearLayout>
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"/>
+    <!-- 车辆图片布局 -->
+<RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+        android:layout_weight="291"
+        android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/carimg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/img01"
+        android:scaleType="fitXY"
+         />
+
+    <LinearLayout 
+        android:id="@+id/lin0"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical">
+        </LinearLayout>
+    <TextView
+        android:id="@+id/tv_changecar"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/popupback"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:text=""
+        android:textColor="@color/white"
+        android:orientation="horizontal" />
+    
+    
+
+    </RelativeLayout>
+    <!-- 商城推送布局 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="91"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/mall"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/bluedark"
+            android:hint="@string/mall"
+            android:textColorHint="@color/white" />
+        <!-- 产品推送水平滚动条布局 -->
+
+        <HorizontalScrollView
+            android:id="@+id/mallhorizontalscrollview"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:scrollbars="none" >
+
+            <LinearLayout
+                android:id="@+id/lin_mallhorizontalscrollview_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal" >
+            </LinearLayout>
+        </HorizontalScrollView>
+    </LinearLayout>
+    <!-- 车况检查布局 -->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/white" />
+
+    <LinearLayout
+        android:id="@+id/lin_carcheck"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="86"
+        android:background="@color/bluedark"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="30dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="@color/white" />
+
+        <View
+            android:layout_width="30dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="2dp"
+            android:background="@color/white" />
+
+        <View
+            android:layout_width="30dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="2dp"
+            android:background="@color/white" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/carcheck"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+    </LinearLayout>
+    <!-- 驾驶安全布局 -->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="142"
+        android:background="@color/bluelight"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/tv_score"
+                android:layout_alignBottom="@+id/tv_score"
+                android:layout_toRightOf="@+id/tv_score"
+                android:text="分"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/tv_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:text="80"
+                android:textColor="@color/orangedark"
+                android:textSize="40sp" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/drivesafe"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+    </LinearLayout>
+    <!-- 即时车况布局 -->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/white" />
+
+    <LinearLayout
+        android:id="@+id/lin_GPS"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="98"
+        android:background="@color/greenlight" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/gps"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+    </LinearLayout>
+    <!-- 提醒与远程布局 -->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/white" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="236" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="136" >
+
+                <RelativeLayout
+                    android:id="@+id/rel_remind"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/orangedark" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/remind"
+                            android:layout_gravity="center_horizontal"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                        <ImageView 
+                            android:layout_width="70dp"
+                            android:layout_height="0.1dp"
+                            android:background="@drawable/gradient_white"
+                            />
+                        <TextView 
+                            android:id="@+id/tv_remindnum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:text="16条未读"
+                            android:textColor="@color/white"/>
+                         <ImageView 
+                            android:layout_width="70dp"
+                            android:layout_height="0.1dp"
+                            android:background="@drawable/gradient_white"
+                            />
+                        
+                    </LinearLayout>
+                    
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/white" />
+
+                <LinearLayout
+                    android:id="@+id/lin_remotecheck"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/greendark" >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/remotecheck"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </LinearLayout>
+            <!-- 底部咨询布局 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="90" >
+
+                <LinearLayout
+                    android:id="@+id/lin_consult"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="@color/orangelight"
+                    android:orientation="vertical" >
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/white" />
+					<LinearLayout 
+					    android:layout_width="wrap_content"
+					    android:layout_height="match_parent"
+					    android:layout_gravity="center_horizontal"
+					    android:orientation="horizontal">
+					    <ImageView 
+					        android:layout_width="30dp"
+					        android:layout_height="30dp"
+					        android:src="@drawable/consult"
+					        android:layout_marginRight="5dp"
+					        android:layout_gravity="center_vertical"/>
+					
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/consult"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+                    </LinearLayout>
+                    
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lin_my"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="@color/orangelight"
+                    android:orientation="vertical" >
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/white" />
+
+                    <LinearLayout 
+					    android:layout_width="wrap_content"
+					    android:layout_height="match_parent"
+					    android:layout_gravity="center_horizontal"
+					    android:orientation="horizontal">
+                    <ImageView 
+					        android:layout_width="30dp"
+					        android:layout_height="30dp"
+					        android:src="@drawable/myicon"
+					        android:layout_marginRight="5dp"
+					        android:layout_gravity="center_vertical"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/my"
+                        android:textColor="@color/white"
+                        android:textSize="21sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+         <com.tool.CircleImageView
+            android:id="@+id/circleicon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/circle_ico"
+            app:border_color="@color/white"
+            app:border_width="2dp" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+<RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/orangelight">
+
+        <LinearLayout
+            android:id="@+id/lin_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal" >
+
+            <ImageView
+                 android:id="@+id/img_purchaserecord_back"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/addyearjian"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/img_commit"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/lin_back"
+            android:layout_marginRight="18dp"
+            android:src="@drawable/right" />
+
+    </RelativeLayout>
+<RelativeLayout 
+     android:layout_width="match_parent"
+     android:layout_height="40dp"
+    >
+  <TextView 
+      android:id="@+id/nowdata"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_centerVertical="true"
+     android:text="@string/nowyeardata"
+     android:textStyle="bold"
+     android:layout_marginLeft="5dp"
+      />  
+    <TextView
+     android:id="@+id/tv_nowdata" 
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_toRightOf="@+id/nowdata"
+     android:text="3333333"
+     android:textColor="@color/textgraydark"
+     android:layout_centerVertical="true"
+        />
+        <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentRight="true"
+         android:layout_centerVertical="true"
+        android:layout_marginRight="15dp"
+        android:src="@drawable/go" />
+</RelativeLayout>
+
+<RelativeLayout 
+     android:layout_width="match_parent"
+     android:layout_height="40dp"
+    >
+  <TextView 
+      android:id="@+id/nextdata"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_centerVertical="true"
+     android:text="@string/nextyeardata"
+     android:textStyle="bold"
+     android:layout_marginLeft="5dp"
+      />  
+    <TextView
+     android:id="@+id/tv_nextdata" 
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_toRightOf="@+id/nextdata"
+     android:text="3333333"
+     android:textColor="@color/textgraydark"
+     android:layout_centerVertical="true"
+        />
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentRight="true"
+         android:layout_centerVertical="true"
+        android:layout_marginRight="15dp"
+        android:src="@drawable/go" />
+
+</RelativeLayout>
+<RelativeLayout 
+     android:layout_width="match_parent"
+     android:layout_height="40dp"
+    >
+  <TextView 
+      android:id="@+id/feiyong"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_centerVertical="true"
+     android:text="@string/yearmoney"
+     android:textStyle="bold"
+     android:layout_marginLeft="5dp"
+      />  
+    <EditText
+     android:id="@+id/edt_feiyong" 
+     android:layout_width="100dp"
+     android:layout_height="wrap_content"
+     android:layout_toRightOf="@+id/feiyong"
+     android:text="1000"
+     android:textColor="@color/textgraydark"
+     android:layout_centerVertical="true"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/edt_feiyong"
+        android:layout_alignBottom="@+id/edt_feiyong"
+        android:layout_toRightOf="@+id/edt_feiyong"
+        android:text="元" />
+
+</RelativeLayout>
+<RelativeLayout 
+     android:layout_width="match_parent"
+     android:layout_height="40dp"
+    >
+  <TextView 
+      android:id="@+id/beizhu"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_centerVertical="true"
+     android:text="@string/beizhu"
+     android:textStyle="bold"
+     android:layout_marginLeft="5dp"
+      />  
+    <EditText
+     android:id="@+id/edt_beizhu" 
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:layout_toRightOf="@+id/beizhu"
+     android:text="无"
+     android:textColor="@color/textgraydark"
+     android:layout_centerVertical="true"
+        />
+</RelativeLayout>
+</LinearLayout>

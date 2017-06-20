@@ -1,0 +1,180 @@
+package com.Activity;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.json.JSONObject;
+
+import com.Adapter.ActivityCommodityNewsadapter;
+import com.Adapter.ActivityMyShoppingadapter;
+import com.Bll.CBLL;
+import com.Entity.Goods;
+import com.Entity.GoodsSet;
+import com.Entity.Merchant;
+import com.Entity.MerchantSet;
+import com.Http.HttpCallback;
+import com.Http.HttpTask;
+import com.baidu.mapapi.common.SysOSUtil;
+import com.tool.JSONEntity;
+import com.tool.MyURL;
+import com.tool.SPUtils;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.text.Spannable;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+public class SearchMyShopping  extends Activity{
+    private RelativeLayout rel_shop_search;
+	private Spinner searchtype;
+	private ImageView img_shopsearch_back;
+	private TextView search;
+	private int type;
+	private MerchantSet list;
+	private ListView lis_search;
+	private EditText homesearch_edit;
+	private String searchcontext; 
+	private GoodsSet list2;
+	private ActivityMyShoppingadapter adapter;	
+	private ActivityCommodityNewsadapter adapter2;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.activity_searchmshopping);
+		
+		initview();
+		setListent();
+		
+		
+	}
+	private void initview() {
+		// TODO Auto-generated method stub
+		lis_search=(ListView)findViewById(R.id.lis_search);
+		homesearch_edit=(EditText)findViewById(R.id.homesearch_edit);
+		rel_shop_search=(RelativeLayout)findViewById(R.id.rel_shop_search);
+		img_shopsearch_back=(ImageView)findViewById(R.id.img_shopsearch_back);
+		searchtype=(Spinner)findViewById(R.id.searchtype);
+		search=(TextView)findViewById(R.id.search);
+	}
+	private void setListent() {
+		// TODO Auto-generated method stub
+		search.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+			searchcontext=homesearch_edit.getText().toString().trim();
+		
+			if(type==0){ //发送的是商家
+				 HashMap<String, String> allmerchant=new Merchant().getmerchantsearch(SPUtils.get(SearchMyShopping.this, "userId", -1).toString(),SPUtils.get(SearchMyShopping.this, "userTokens", "").toString(),1,10,searchcontext+"");	 
+			     //获得商家有关数据
+			     new HttpTask(merchantsearchCallback, MyURL.MERCHANT).execute(allmerchant);
+			  
+			}	
+			else if(type==1){ //发送搜索的商品
+				 HashMap<String, String> allmerchant=new Merchant().getmerchantsearch(SPUtils.get(SearchMyShopping.this, "userId", -1).toString(),SPUtils.get(SearchMyShopping.this, "userTokens", "").toString(),1,10,searchcontext+"");	 
+			     //获得商家有关数据
+			     new HttpTask(allgoodssearchCallback, MyURL.GOODS).execute(allmerchant);
+			}
+			}
+		});
+		rel_shop_search.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		img_shopsearch_back.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				finish();
+			}
+		});
+		searchtype.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				// TODO Auto-generated method stub
+				type=arg2;
+				
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+	}
+ HttpCallback merchantsearchCallback=new HttpCallback() {
+	
+	@Override
+	public void getResult(JSONObject json) {
+		// TODO Auto-generated method stub
+		CBLL cBllmerchant = CBLL.getInstance();
+		JSONEntity entity = cBllmerchant.json2merchant(json);
+		if(entity.isFlag()){	
+			MerchantSet merchantlist = (MerchantSet) entity.getData();//将数据都放进set方法中
+		    List<Merchant>l=new ArrayList<Merchant>();	//一个实体类的list
+			  for(int i=0; i<merchantlist.getSize(); i++){	 //循环set方法
+				Merchant merchantentity = merchantlist.getItem(i);//获取每一项实体类中全部的值
+						
+					l.add(merchantentity);
+					list=new MerchantSet(l);
+					adapter = new ActivityMyShoppingadapter(SearchMyShopping.this, list);
+					lis_search.setAdapter(adapter);	
+					SPUtils.put(SearchMyShopping.this, "merchantid", merchantlist.getItem(i).getMerchant_id());	
+				
+				}
+			
+			}
+	}
+};
+
+HttpCallback allgoodssearchCallback=new HttpCallback() {
+	
+	@Override
+	public void getResult(JSONObject json) {
+		// TODO Auto-generated method stub
+
+		CBLL cBllmerchant = CBLL.getInstance();
+		JSONEntity entity = cBllmerchant.json2goods(json);
+	  if(entity.isFlag()){	
+	  GoodsSet goodslist = (GoodsSet) entity.getData();//将数据都放进set方法中
+      List<Goods>l=new ArrayList<Goods>();	//一个实体类的list
+	  for(int i=0; i<goodslist.getSize(); i++){	 //循环set方法
+		  Goods goodsentity = goodslist.getItem(i);//获取每一项实体类中全部的值
+				
+			l.add(goodsentity);
+			list2=new GoodsSet(l);
+			adapter2 = new ActivityCommodityNewsadapter(SearchMyShopping.this, list2);
+			lis_search.setAdapter(adapter2);	
+			
+			
+		}
+	
+	}
+
+	
+	}
+};
+}

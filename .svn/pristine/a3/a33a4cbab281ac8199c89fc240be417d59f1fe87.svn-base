@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+  
+<RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/auto"
+    >
+      <TextView 
+       android:id="@+id/data"
+       android:layout_centerVertical="true"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="创建时间："
+       /> 
+   <TextView 
+       android:id="@+id/tv_data"
+       android:layout_centerVertical="true"
+       android:layout_toRightOf="@+id/data"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="2015"
+       /> 
+   <ImageView 
+       android:id="@+id/xiugai"
+       android:layout_width="20dp"
+       android:layout_height="30dp"
+       android:src="@drawable/xiugai"
+       android:layout_alignParentRight="true"
+       android:layout_marginRight="10dp"
+       /> 
+</RelativeLayout>
+<RelativeLayout 
+     android:layout_width="match_parent"
+     android:layout_height="40dp"
+    >
+  <TextView 
+      android:id="@+id/danhao"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_centerVertical="true"
+     android:text="@string/yeardata"
+     android:textStyle="bold"
+     android:layout_marginLeft="5dp"
+      />  
+    <TextView
+     android:id="@+id/tv_nextdata" 
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_toRightOf="@+id/danhao"
+     android:text="3333333"
+     android:textColor="@color/textgraydark"
+     android:layout_centerVertical="true"
+        />
+</RelativeLayout>
+<RelativeLayout 
+     android:layout_width="match_parent"
+     android:layout_height="40dp"
+    >
+  <TextView 
+      android:id="@+id/feiyong"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_centerVertical="true"
+     android:text="@string/yearmoney"
+     android:textStyle="bold"
+     android:layout_marginLeft="5dp"
+      />  
+    <TextView
+     android:id="@+id/tv_feiyong" 
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_toRightOf="@+id/feiyong"
+     android:text="1000"
+     android:textColor="@color/textgraydark"
+     android:layout_centerVertical="true"
+        />
+</RelativeLayout>
+<RelativeLayout 
+     android:layout_width="match_parent"
+     android:layout_height="40dp"
+    >
+  <TextView 
+      android:id="@+id/beizhu"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_centerVertical="true"
+     android:text="@string/beizhu"
+     android:textStyle="bold"
+     android:layout_marginLeft="5dp"
+      />  
+    <TextView
+     android:id="@+id/tv_beizhu" 
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_toRightOf="@+id/beizhu"
+     android:text="无"
+     android:textColor="@color/textgraydark"
+     android:layout_centerVertical="true"
+        />
+</RelativeLayout>
+<View 
+     android:layout_width="match_parent"
+     android:layout_height="10dp"
+     android:background="@color/bacgroundcolor"
+    />
+</LinearLayout>

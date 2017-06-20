@@ -1,0 +1,208 @@
+package com.Entity;
+
+import java.util.HashMap;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.Context;
+
+import com.Activity.Shangjia_Detail;
+import com.tool.SPUtils;
+
+
+public class Merchant {
+
+	private int merchant_id;		//商家id
+	private String name;			//商家名称
+	private String address;			//商家地址
+	private String longtude;		//商家经度
+	private String latitude;		//商家维度
+	private String open_time;		//营业时间
+	private String business_scope;	//经营范围
+	private String tel;				//联系电话
+	private Picture pictures;		//图片集合
+	private int goods_num;			//商品数量
+	private String business_description; //商家
+	private int user_id;			//管理用户
+
+	public Merchant(String string, String string2, String string3,String string4) {
+		// TODO Auto-generated constructor stub
+		this.name=string;
+		this.address=string2;
+		this.tel=string3;
+		Picture picture =new Picture();
+		picture.setUrl(string4);
+		this.pictures=picture;
+		
+	}
+	public Merchant(JSONObject merchant,int i) {
+		try {
+			if(i==1){
+			this.name=merchant.getString("name");//商家名称
+			this.address=merchant.getString("address");
+			this.tel=merchant.getString("tel");
+			String id =merchant.getString("merchant_id");
+			this.merchant_id=Integer.valueOf(id).intValue();//获取商家id
+			
+			Picture picture =new Picture();
+			JSONArray array = merchant.getJSONArray("pictures");//解封图片的object
+		    JSONObject json=array.getJSONObject(0);
+			picture.setUrl(json.getString("url"));
+	        this.pictures=picture; 		
+	        
+	        this.business_description=merchant.getString("business_description");
+	        this.longtude=merchant.getString("longtude"); 
+	        this.latitude=merchant.getString("latitude"); 
+			}
+			
+		
+		}
+		catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+	}
+	
+
+
+   public String getBusiness_description() {
+		return business_description;
+	}
+
+	public void setBusiness_description(String business_description) {
+		this.business_description = business_description;
+	}
+
+		private String parseInt(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	//获商家的列表
+	public HashMap<String, String>getmerchant(String UserId, String Tokens ,int pager,int Count) {
+		HashMap<String, String> json = new HashMap<String, String>();
+		json.put("user_id", UserId);
+		json.put("tokens",Tokens);
+        json.put("page","" + pager);
+        json.put("num",""+ Count);
+		return json;
+	}
+		
+	//获商家的搜索的列表
+	public HashMap<String, String>getmerchantsearch(String UserId, String Tokens ,int pager,int Count,String Search) {
+		HashMap<String, String> json = new HashMap<String, String>();
+		json.put("user_id", UserId);
+		json.put("tokens",Tokens);
+        json.put("page","" + pager);
+        json.put("num",""+ Count);
+        json.put("search",Search );
+		return json;
+	}
+	
+	//获取商家详情的列表
+	public HashMap<String, String> getMerchantDetail(Context context){
+		HashMap<String, String> map=new HashMap<String, String>();
+		map.put("user_id", SPUtils.get(context, "userId", -1).toString());
+		map.put("tokens",SPUtils.get(context, "userTokens", "").toString());
+		map.put("merchant_id",SPUtils.get(context, "merchantid", -1).toString());
+		return map; 
+	}
+	public Merchant() {}
+ 
+	public int getMerchant_id() {
+		return merchant_id;
+	}
+
+	public void setMerchant_id(int merchant_id) {
+		this.merchant_id = merchant_id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getLongtude() {
+		return longtude;
+	}
+
+	public void setLongtude(String longtude) {
+		this.longtude = longtude;
+	}
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getOpen_time() {
+		return open_time;
+	}
+
+	public void setOpen_time(String open_time) {
+		this.open_time = open_time;
+	}
+
+	public String getBusiness_scope() {
+		return business_scope;
+	}
+
+	public void setBusiness_scope(String business_scope) {
+		this.business_scope = business_scope;
+	}
+
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+	public Picture getPictures() {
+		return pictures;
+	}
+
+	public void setPictures(Picture pictures) {
+		this.pictures = pictures;
+	}
+
+	public int getGoods_num() {
+		return goods_num;
+	}
+
+	public void setGoods_num(int goods_num) {
+		this.goods_num = goods_num;
+	}
+
+	public int getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
+	
+	
+	
+	
+	
+	
+}

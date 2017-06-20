@@ -1,0 +1,98 @@
+package com.Activity;
+
+import java.util.HashMap;
+
+import org.json.JSONObject;
+import org.xutils.x;
+
+import com.Bll.CBLL;
+import com.Entity.Goods;
+import com.Entity.Merchant;
+import com.Http.HttpCallback;
+import com.Http.HttpTask;
+import com.tool.JSONEntity;
+import com.tool.MyURL;
+import com.tool.SPUtils;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class Shopping_Detail extends Activity{
+ private ImageView img_shangcheng_back,shangjia_image;
+ private TextView tv_shangpinname,shoping_prive,shangjia_name,shangjia_tel,shangjia_address,tv_abstrb;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.activity_shoppingdetail);
+	
+	    RequestMainData();
+		initview();
+		setListen();
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void RequestMainData() {
+		// TODO Auto-generated method stub
+		 HashMap<String, String> shoppingdetail=new Goods().getgoodsdetail(Shopping_Detail.this);	 
+	     //获得商品有关数据
+	     new HttpTask(allgoodsCallback, MyURL.GOODSDETAIL).execute(shoppingdetail);
+	}
+	
+	HttpCallback allgoodsCallback=new HttpCallback() {
+		
+		@Override
+		public void getResult(JSONObject json) {
+			// TODO Auto-generated method stub	
+			CBLL CBllmerchantdetail =CBLL.getInstance();
+			JSONEntity entity =CBllmerchantdetail.json2goodsdetail(json);
+			if(entity.isFlag()){
+				Goods goodsentity =(Goods) entity.getData();
+				tv_shangpinname.setText(goodsentity.getName());
+				shoping_prive.setText(goodsentity.getMoney()+"");
+				shangjia_name.setText(goodsentity.getMerchant().getName());
+				shangjia_tel.setText(goodsentity.getMerchant().getTel());
+				shangjia_address.setText(goodsentity.getMerchant().getAddress());
+				tv_abstrb.setText(goodsentity.getDesc());
+				
+				 if(!goodsentity.getPictures().getUrl().equals("")){
+						x.image().bind(shangjia_image, MyURL.HIP+"/"+goodsentity.getPictures().getUrl());
+					}
+						else{
+							shangjia_image.setImageResource(R.drawable.shangpin_image);
+						}
+			}
+		}
+	};
+	
+	private void initview() {
+		// TODO Auto-generated method stub
+		img_shangcheng_back=(ImageView)findViewById(R.id.img_shangcheng_back);
+		tv_shangpinname=(TextView)findViewById(R.id.tv_shangpinname);
+		shoping_prive=(TextView)findViewById(R.id.shoping_prive);
+		shangjia_name=(TextView)findViewById(R.id.shangjia_name);
+		shangjia_tel=(TextView)findViewById(R.id.shangjia_tel);
+		shangjia_address=(TextView)findViewById(R.id.shangjia_address);
+		tv_abstrb=(TextView)findViewById(R.id.tv_abstrb);
+		shangjia_image=(ImageView)findViewById(R.id.shangjia_image);
+	}
+	private void setListen() {
+		// TODO Auto-generated method stub
+		img_shangcheng_back.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+			finish();	
+			}
+		});
+		
+	}
+}

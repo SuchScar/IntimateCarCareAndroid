@@ -1,0 +1,247 @@
+package com.Activity;
+
+import java.util.HashMap;
+
+import org.json.JSONObject;
+import org.xutils.x;
+import org.xutils.common.util.DensityUtil;
+import org.xutils.image.ImageOptions;
+
+import com.Bll.CBLL;
+import com.Entity.Car;
+import com.Entity.UserEntity;
+import com.Http.HttpCallback;
+import com.Http.HttpTask;
+import com.tool.JSONEntity;
+import com.tool.MyURL;
+import com.tool.SPUtils;
+import com.tool.ToastUtil;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+public class MyActivity extends Activity {
+
+	private RelativeLayout rel_travel_report, rel_my_order,
+			rel_historical_service, rel_car_setting, rel_software_setting,
+			rel_car_life;
+	private Button but_my_info, but_my_red_paper;
+	private ImageView img_carlogo;
+	private TextView tv_carbrandarctic, tv_mileage, tv_carnum, tv_rednum;
+	private LinearLayout lin_back;
+
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.activity_my);
+		initView();
+		RequestData();
+
+		setListen();
+
+	}
+
+	@SuppressWarnings("unchecked")
+	private void RequestData() {
+		// TODO Auto-generated method stub
+		HashMap<String, String> idtakjson = new UserEntity()
+				.getIdTaken(MyActivity.this);
+		new HttpTask(myCallback, MyURL.MY).execute(idtakjson);
+
+	}
+
+	private HttpCallback myCallback = new HttpCallback() {
+
+		@Override
+		public void getResult(JSONObject json) {
+			// TODO Auto-generated method stub
+			CBLL cbll = CBLL.getInstance();
+			JSONEntity entity = cbll.json2my(json);
+			if (entity.isFlag()) {
+				Car car = (Car) entity.getData();
+
+				tv_carbrandarctic.setText(car.getBrand_name()
+						+ car.getArctic_name());
+				tv_mileage.setText(car.getMileage());
+				tv_carnum.setText(car.getCar_num());
+				tv_rednum.setText(car.getRed_num() + "");
+
+				x.image().bind(img_carlogo,car.getBrand_logo());
+
+			} else {
+				if (entity.getMessage() == MyURL.MSG_OTHERS_ERROR) {
+					ToastUtil.show(MyActivity.this, "获取失败");
+				} else if (entity.getMessage() == MyURL.MSG_TOKENS_ERROR) {
+					ToastUtil.show(MyActivity.this, "您的账号在别的地方登陆，请重新登录");
+					// 重启app
+					restartApplication();
+				}
+			}
+
+		}
+	};
+
+	private void initView() {
+		// TODO Auto-generated method stub
+		rel_travel_report = (RelativeLayout) findViewById(R.id.rel_travel_report);
+		rel_my_order = (RelativeLayout) findViewById(R.id.rel_my_order);
+		rel_historical_service = (RelativeLayout) findViewById(R.id.rel_historical_service);
+		rel_car_setting = (RelativeLayout) findViewById(R.id.rel_car_setting);
+		rel_software_setting = (RelativeLayout) findViewById(R.id.rel_software_setting);
+		but_my_info = (Button) findViewById(R.id.but_my_info);
+		but_my_red_paper = (Button) findViewById(R.id.but_my_red_paper);
+		lin_back = (LinearLayout) findViewById(R.id.lin_back);
+		img_carlogo = (ImageView) findViewById(R.id.img_carlogo);
+		rel_car_life = (RelativeLayout) findViewById(R.id.rel_car_life);
+		tv_carbrandarctic = (TextView) findViewById(R.id.tv_carbrandarctic);
+		tv_mileage = (TextView) findViewById(R.id.tv_mileage);
+		tv_carnum = (TextView) findViewById(R.id.tv_carnum);
+		tv_rednum = (TextView) findViewById(R.id.tv_rednum);
+
+	}
+
+	private void setListen() {
+		// TODO Auto-generated method stub
+		rel_car_setting.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(MyActivity.this, MyCarSetting.class);
+				startActivityForResult(intent, 1);
+			}
+		});
+		lin_back.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				finish();
+			}
+		});
+		but_my_info.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(MyActivity.this,
+						MyinfoActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		but_my_red_paper.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if ((Boolean) SPUtils
+						.get(MyActivity.this, "isBoxbind", false)) {
+				Intent intent = new Intent(MyActivity.this,
+						MyRedPaprerActivity.class);
+				startActivity(intent);
+				} else {
+					MainActivity.dialogredmain(MyActivity.this);
+				}
+			}
+		});
+
+		rel_my_order.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ToastUtil.show(MyActivity.this, "我的订单待开发");
+			}
+		});
+
+		rel_historical_service.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ToastUtil.show(MyActivity.this, "历史服务待开发");
+			}
+		});
+
+		rel_software_setting.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(MyActivity.this,
+						SoftSettingActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		rel_travel_report.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if ((Boolean) SPUtils
+						.get(MyActivity.this, "isBoxbind", false)) {
+				Intent intent = new Intent(MyActivity.this,
+						TourReportListActivity.class);
+				startActivity(intent);
+				} else {
+					MainActivity.dialogredmain(MyActivity.this);
+				}
+			}
+		});
+
+		rel_car_life.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(MyActivity.this,
+						VehicleLifeActivity.class);
+				startActivity(intent);
+			}
+		});
+		
+		
+
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		switch (requestCode) {
+		case 1:
+			if(resultCode==1){
+				RequestData();
+				setResult(1);
+			}
+			break;
+		default:
+			break;
+		}
+	}
+
+	// 重启app
+	private void restartApplication() {
+		final Intent intent = getPackageManager().getLaunchIntentForPackage(
+				getPackageName());
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(intent);
+	}
+
+}

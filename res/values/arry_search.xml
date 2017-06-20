@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <resources>
+    <string-array name="spingarr_search">
+     <item>商家</item>  
+    <item>商品</item>   
+    </string-array>
+</resources>

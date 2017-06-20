@@ -1,0 +1,187 @@
+# view AndroidManifest.xml #generated:48
+-keep class com.Application.MyApplication { <init>(...); }
+
+# view AndroidManifest.xml #generated:100
+-keep class com.IntimateCarCare.AboutSoftSetting { <init>(...); }
+
+# view AndroidManifest.xml #generated:99
+-keep class com.IntimateCarCare.AddInsuranceRecords { <init>(...); }
+
+# view AndroidManifest.xml #generated:72
+-keep class com.IntimateCarCare.AddLicenseplateActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:109
+-keep class com.IntimateCarCare.AddYearInspection { <init>(...); }
+
+# view AndroidManifest.xml #generated:104
+-keep class com.IntimateCarCare.Addmaintenancedate { <init>(...); }
+
+# view AndroidManifest.xml #generated:71
+-keep class com.IntimateCarCare.AllCarClassify { <init>(...); }
+
+# view AndroidManifest.xml #generated:66
+-keep class com.IntimateCarCare.AreaActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:77
+-keep class com.IntimateCarCare.CarConfiguration { <init>(...); }
+
+# view AndroidManifest.xml #generated:92
+-keep class com.IntimateCarCare.CarReportActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:76
+-keep class com.IntimateCarCare.ChangeCarConfiguration { <init>(...); }
+
+# view AndroidManifest.xml #generated:75
+-keep class com.IntimateCarCare.ChangeCarNumberActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:102
+-keep class com.IntimateCarCare.ChangeInsuranceInformation { <init>(...); }
+
+# view AndroidManifest.xml #generated:106
+-keep class com.IntimateCarCare.ChangeMaintenance { <init>(...); }
+
+# view AndroidManifest.xml #generated:110
+-keep class com.IntimateCarCare.ChangeYearInspection { <init>(...); }
+
+# view AndroidManifest.xml #generated:108
+-keep class com.IntimateCarCare.ChooseMaintenanceItem { <init>(...); }
+
+# view AndroidManifest.xml #generated:87
+-keep class com.IntimateCarCare.CommodityNewsActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:90
+-keep class com.IntimateCarCare.ConsultActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:98
+-keep class com.IntimateCarCare.ConsultDetailActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:97
+-keep class com.IntimateCarCare.DataFlowDetail { <init>(...); }
+
+# view AndroidManifest.xml #generated:112
+-keep class com.IntimateCarCare.EditionActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:96
+-keep class com.IntimateCarCare.FaultDetail { <init>(...); }
+
+# view AndroidManifest.xml #generated:111
+-keep class com.IntimateCarCare.FunctionIntroduction { <init>(...); }
+
+# view AndroidManifest.xml #generated:73
+-keep class com.IntimateCarCare.GPSActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:95
+-keep class com.IntimateCarCare.HistoryCarReportDetail { <init>(...); }
+
+# view AndroidManifest.xml #generated:93
+-keep class com.IntimateCarCare.HistoryCarReportListActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:94
+-keep class com.IntimateCarCare.InsuranceDate { <init>(...); }
+
+# view AndroidManifest.xml #generated:80
+-keep class com.IntimateCarCare.IntelligentBoxManage { <init>(...); }
+
+# view AndroidManifest.xml #generated:63
+-keep class com.IntimateCarCare.LoginActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:54
+-keep class com.IntimateCarCare.MainActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:101
+-keep class com.IntimateCarCare.MaintenanceDate { <init>(...); }
+
+# view AndroidManifest.xml #generated:64
+-keep class com.IntimateCarCare.MyActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:74
+-keep class com.IntimateCarCare.MyCarSetting { <init>(...); }
+
+# view AndroidManifest.xml #generated:67
+-keep class com.IntimateCarCare.MyRedPaprerActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:81
+-keep class com.IntimateCarCare.MyShopping { <init>(...); }
+
+# view AndroidManifest.xml #generated:65
+-keep class com.IntimateCarCare.MyinfoActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:70
+-keep class com.IntimateCarCare.MyweatherActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:105
+-keep class com.IntimateCarCare.PeccancyActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:79
+-keep class com.IntimateCarCare.PurchaseRecordActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:69
+-keep class com.IntimateCarCare.RegisterActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:103
+-keep class com.IntimateCarCare.RemindActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:84
+-keep class com.IntimateCarCare.SearchMyShopping { <init>(...); }
+
+# view AndroidManifest.xml #generated:83
+-keep class com.IntimateCarCare.Shangjia_Detail { <init>(...); }
+
+# view AndroidManifest.xml #generated:82
+-keep class com.IntimateCarCare.ShoppingGoItem { <init>(...); }
+
+# view AndroidManifest.xml #generated:88
+-keep class com.IntimateCarCare.Shopping_Detail { <init>(...); }
+
+# view AndroidManifest.xml #generated:68
+-keep class com.IntimateCarCare.SoftSettingActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:86
+-keep class com.IntimateCarCare.TourReportDetailActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:85
+-keep class com.IntimateCarCare.TourReportListActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:78
+-keep class com.IntimateCarCare.VINnumberActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:89
+-keep class com.IntimateCarCare.VehicleLifeActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:107
+-keep class com.IntimateCarCare.YearInspection { <init>(...); }
+
+# view AndroidManifest.xml #generated:118
+-keep class com.baidu.location.f { <init>(...); }
+
+# view res/layout/activity_gps.xml #generated:8
+# view res/layout/activity_tourreportdetail.xml #generated:8
+-keep class com.baidu.mapapi.map.MapView { <init>(...); }
+
+# view res/layout/activity_commoditynews.xml #generated:75
+# view res/layout/activity_historycarreportlist.xml #generated:39
+# view res/layout/activity_myshopping.xml #generated:203
+# view res/layout/activity_redpaper.xml #generated:196
+# view res/layout/activity_shoppinggoitem.xml #generated:134
+# view res/layout/fragment_firstremind.xml #generated:7
+-keep class com.handmark.pulltorefresh.library.PullToRefreshListView { <init>(...); }
+
+# view res/layout/activity_gps.xml #generated:15
+# view res/layout/activity_gps.xml #generated:253
+# view res/layout/activity_main.xml #generated:443
+# view res/layout/activity_myinfo.xml #generated:54
+# view res/layout/activity_tourreportdetail.xml #generated:15
+-keep class com.tool.CircleImageView { <init>(...); }
+
+# view res/layout/activity_addlicenseplate.xml #generated:169
+# view res/layout/activity_carreport.xml #generated:177
+# view res/layout/activity_carreport.xml #generated:228
+# view res/layout/activity_changecarconfiguration.xml #generated:138
+# view res/layout/activity_changecarconfiguration.xml #generated:185
+# view res/layout/activity_historycarreportdetail.xml #generated:174
+# view res/layout/activity_historycarreportdetail.xml #generated:225
+-keep class com.tool.MyListView { <init>(...); }
+
+# view res/layout/activity_allcarclassify.xml #generated:77
+-keep class com.tool.SideBar { <init>(...); }
+

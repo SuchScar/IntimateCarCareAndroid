@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:padding="20.0dip" 
+    android:background="@color/background_gray">
+
+    <LinearLayout
+        android:layout_width="309dp"
+        android:layout_height="135dp"
+        android:layout_gravity="center"
+        android:background="@drawable/noborder_whitecontent_radius_border"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"               
+                android:text="请输入手机号和密码"
+                android:textSize="10pt" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/textGray" />
+       
+	        <Button
+	            android:id="@+id/positiveButton"
+	            android:layout_width="match_parent"
+	            android:layout_height="match_parent"
+	            android:gravity="center"
+	            android:text="确定"
+	            android:textColor="@color/blue"
+	            android:textSize="9pt" 
+	            android:layout_marginTop="10dp"
+	            android:layout_marginLeft="50dp"/>
+        
+
+    </LinearLayout>
+
+</FrameLayout>

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+<RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/orangelight">
+
+        <LinearLayout
+          
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal" >
+
+            <ImageView
+                 android:id="@+id/img_purchaserecord_back"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/goumaidangan"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/img_commit"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/lin_back"
+            android:layout_marginRight="21dp"
+            android:src="@drawable/right" />
+
+    </RelativeLayout>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp" >
+
+    <TextView
+        android:id="@+id/tv_jine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/buyjine"
+        android:textColor="@color/textgraydark"
+        android:textSize="18sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="25dp"
+        android:layout_toRightOf="@+id/tv_jine"
+        android:background="@drawable/pailiang" >
+
+        <EditText
+            android:id="@+id/edt_jine"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:ems="10"
+            android:text="0.00"
+            android:textColor="@color/textgraylight"
+            android:gravity="right"
+            android:textSize="15dp" >
+
+            <requestFocus />
+        </EditText>
+        <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/edt_jine"
+        
+        android:text="万元"
+            />
+      
+    </RelativeLayout>
+</RelativeLayout>
+ 
+    <View 
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:background="@color/linegray"/> 
+    
+    <RelativeLayout 
+     android:id="@+id/rel_buydate"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:textSize="18sp"
+        android:textColor="@color/textgraydark"
+        android:text="@string/buydate" />
+    <TextView
+        android:id="@+id/tv_date"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_centerVertical="true"
+         android:layout_toLeftOf="@+id/gowhere2"
+         android:text="0000-00-00"
+         android:layout_marginRight="5dp"
+         android:textColor="@color/textgraylight"
+         android:textSize="18sp" />
+    <ImageView
+        android:id="@+id/gowhere2"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:src="@drawable/go" />
+
+</RelativeLayout>
+   <View 
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:background="@color/linegray"/> 
+    
+   <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp" >
+
+    <TextView
+        android:id="@+id/tv_buyby"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/carbayby"
+        android:textColor="@color/textgraydark"
+        android:textSize="18sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="25dp"
+        android:layout_toRightOf="@+id/tv_buyby"
+        android:background="@drawable/pailiang" >
+
+        <EditText
+            android:id="@+id/edt_buyby"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:ems="10"
+            android:textColor="@color/textgraylight"
+            android:gravity="left"
+            android:textSize="15dp" >
+
+            <requestFocus />
+        </EditText>
+        <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/edt_buyby"
+        android:text="请输入购买单位"
+         android:textColor="@color/textgraylight"
+            />
+      
+    </RelativeLayout>
+</RelativeLayout>
+   <View 
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:background="@color/linegray"/>  
+    
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp" >
+
+    <TextView
+        android:id="@+id/tv_buybycall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/buybycall"
+        android:textColor="@color/textgraydark"
+        android:textSize="18sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/tv_buybycall"
+        android:background="@drawable/pailiang" >
+
+        <EditText
+            android:id="@+id/edt_buybycall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@null"
+            android:ems="10"
+            android:hint="请输入单位的电话"
+            android:textColor="@color/textgraylight"
+            android:gravity="left"
+            android:layout_marginRight="3dp"
+            android:textSize="15dp" >
+              
+            <requestFocus />
+        </EditText>
+       
+      
+    </RelativeLayout>
+</RelativeLayout>
+   <View 
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:background="@color/linegray"/> 
+</LinearLayout>

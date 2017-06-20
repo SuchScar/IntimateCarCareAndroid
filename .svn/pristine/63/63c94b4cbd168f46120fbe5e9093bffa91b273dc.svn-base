@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#ffffff</color>
+    <color name="bluelight">#009CE5</color>
+    <color name="bluedark">#007AC6</color>
+    <color name="orangelight">#F08E00</color>
+    <color name="orangedark">#EB6A00</color>
+    <color name="greenlight">#94C41A</color>
+    <color name="greendark">#30AC36</color>
+    <color name="linegray">#EAEAEA</color>
+     <color name="surecolor"> #00E3E3</color>
+    <color name="bacgroundcolor">#E0E0E0</color>
+    <color name="backgray">#EDEDED</color>
+     <color name="black">#000000</color>
+    <color name="textgraydark">#646464</color>
+    <color name="textgraylight">#A1A1A1</color>
+    <color name="titlewhite">#F6F6F6</color>
+    <color name="baoyangxiangmu">#2E2E2E</color>
+    
+</resources>

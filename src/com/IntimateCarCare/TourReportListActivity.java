@@ -1,0 +1,219 @@
+package com.IntimateCarCare;
+
+import java.lang.Thread.UncaughtExceptionHandler;
+import java.util.Calendar;
+import java.util.HashMap;
+
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.format.DateFormat;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.DatePicker;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.Adapter.ActivityTourReportAdapter;
+import com.Bll.CBLL;
+import com.Entity.TourReportBriefSet;
+import com.Entity.UserEntity;
+import com.Http.HttpCallback;
+import com.Http.HttpTask;
+import com.tool.JSONEntity;
+import com.tool.MyURL;
+import com.tool.ToastUtil;
+
+public class TourReportListActivity extends Activity implements
+		UncaughtExceptionHandler {
+
+	private LinearLayout lin_back;
+	private ListView listview;
+	private RelativeLayout rel_yesterday, rel_changedate, rel_tomorrow;
+	private TextView tv_time;
+
+	private ActivityTourReportAdapter adapter;
+	private TourReportBriefSet list;
+
+	// 时间获取类
+	private Calendar calender = Calendar.getInstance();
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.activity_tourreportlist);
+		Thread.setDefaultUncaughtExceptionHandler(this);
+		initView();
+		// 获取列表数据
+		RequestData(DateFormat.format("yyy-MM-dd", calender).toString());
+
+		setListen();
+	}
+
+	@SuppressWarnings("unchecked")
+	private void RequestData(String format) {
+		// TODO Auto-generated method stub
+		HashMap<String, String> idtakjson = new UserEntity()
+				.getIdTaken(TourReportListActivity.this);
+		idtakjson.put("date", format);
+
+		new HttpTask(tourreportCallback, MyURL.TOURREPORTLIST,TourReportListActivity.this)
+				.execute(idtakjson);
+	}
+
+	private HttpCallback tourreportCallback = new HttpCallback() {
+
+		@Override
+		public void getResult(JSONObject json) {
+			// TODO Auto-generated method stub
+			CBLL cbll = CBLL.getInstance();
+			JSONEntity entity = cbll.json2tourreport(json);
+			if (entity.isFlag()) {
+				list = (TourReportBriefSet) entity.getData();
+				if (list.getSize() == 0) {
+					ToastUtil.show(TourReportListActivity.this, "无行程数据");
+				}
+				adapter = new ActivityTourReportAdapter(
+						TourReportListActivity.this, list);
+				listview.setAdapter(adapter);
+				listview.setOnItemClickListener(new OnItemClickListener() {
+
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) {
+						// TODO Auto-generated method stub
+						Intent intent = new Intent(TourReportListActivity.this,
+								TourReportDetailActivity.class);
+						intent.putExtra("treport_id", list.getItem(position)
+								.getTreport_id());
+						startActivity(intent);
+					}
+				});
+
+			} else {
+				if (entity.getMessage() == MyURL.MSG_OTHERS_ERROR) {
+					ToastUtil.show(TourReportListActivity.this, "获取失败");
+				} else if (entity.getMessage() == MyURL.MSG_TOKENS_ERROR) {
+					// 重启app
+					MainActivity
+							.restartApplication(TourReportListActivity.this);
+				}
+			}
+		}
+	};
+
+	private void initView() {
+		// TODO Auto-generated method stub
+		lin_back = (LinearLayout) findViewById(R.id.lin_back);
+		listview = (ListView) findViewById(R.id.listview);
+		rel_yesterday = (RelativeLayout) findViewById(R.id.rel_yesterday);
+		rel_changedate = (RelativeLayout) findViewById(R.id.rel_changedate);
+		rel_tomorrow = (RelativeLayout) findViewById(R.id.rel_tomorrow);
+		tv_time = (TextView) findViewById(R.id.tv_time);
+
+		tv_time.setText(DateFormat.format("yyy-MM-dd", calender));
+
+	}
+
+	private void setListen() {
+		// TODO Auto-generated method stub
+		lin_back.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				finish();
+			}
+		});
+		rel_changedate.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				final DatePickerDialog mDialog = new DatePickerDialog(
+						TourReportListActivity.this, null, calender
+								.get(Calendar.YEAR), calender
+								.get(Calendar.MONTH), calender
+								.get(Calendar.DAY_OF_MONTH));
+				mDialog.setTitle(R.string.setdate);
+				// 手动设置按钮
+				mDialog.setButton(DialogInterface.BUTTON_POSITIVE, "完成",
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								// 通过mDialog.getDatePicker()获得dialog上的DatePicker组件，然后可以获取日期信息
+								DatePicker datePicker = mDialog.getDatePicker();
+								calender.set(datePicker.getYear(),
+										datePicker.getMonth(),
+										datePicker.getDayOfMonth());
+								tv_time.setText(DateFormat.format("yyy-MM-dd",
+										calender));
+								// 获取列表数据
+								RequestData(DateFormat.format("yyy-MM-dd",
+										calender).toString());
+
+							}
+						});
+				// 取消按钮，如果不需要直接不设置即可
+				mDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "取消",
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								System.out.println("BUTTON_NEGATIVE~~");
+							}
+						});
+				mDialog.show();
+			}
+		});
+
+		rel_yesterday.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				// Calendar cal = Calendar.getInstance();
+				calender.set(calender.get(Calendar.YEAR),
+						calender.get(Calendar.MONTH),
+						calender.get(Calendar.DAY_OF_MONTH) - 1);
+				tv_time.setText(DateFormat.format("yyy-MM-dd", calender));
+				// 获取列表数据
+				RequestData(DateFormat.format("yyy-MM-dd", calender).toString());
+			}
+		});
+		rel_tomorrow.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				calender.set(calender.get(Calendar.YEAR),
+						calender.get(Calendar.MONTH),
+						calender.get(Calendar.DAY_OF_MONTH) + 1);
+				tv_time.setText(DateFormat.format("yyy-MM-dd", calender));
+				// 获取列表数据
+				RequestData(DateFormat.format("yyy-MM-dd", calender).toString());
+
+			}
+		});
+
+	}
+
+	@Override
+	public void uncaughtException(Thread thread, Throwable ex) {
+		// TODO Auto-generated method stub
+		System.out.println("uncaughtException---  " + ex);
+	}
+
+}

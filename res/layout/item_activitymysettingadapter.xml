@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+    <RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="40dp"      
+        >
+  <ImageView 
+   android:id="@+id/img_carimage"
+   android:layout_width="30dp"
+    android:layout_height="30dp" 
+    android:src="@drawable/qiche"   
+    android:layout_centerVertical="true"
+    android:layout_marginLeft="8dp"
+      />      
+      <TextView 
+     android:id="@+id/tv_carnum"    
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_centerVertical="true"
+     android:layout_toRightOf="@+id/img_carimage"
+     android:text="京333333"
+     android:layout_marginLeft="5dp"
+          />  
+              
+    </RelativeLayout>
+
+</LinearLayout>

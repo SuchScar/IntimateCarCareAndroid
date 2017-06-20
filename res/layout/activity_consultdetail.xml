@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@color/white">
+    
+    <RelativeLayout
+        android:id="@+id/rel0"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/white" >
+
+        <LinearLayout
+            android:id="@+id/lin_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/back_orange" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:singleLine="true"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/orangedark"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+     <View 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/linegray"/>
+     <ScrollView 
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:scrollbars="none">
+         <LinearLayout 
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="vertical">
+     <LinearLayout 
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_margin="10dp"
+         android:orientation="vertical">
+         <TextView 
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textSize="16sp"
+             android:text="@string/xiangxi"
+             android:textColor="@color/orangedark"/>
+         <TextView 
+             android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textSize="16sp"
+            android:textColor="@color/textgraylight"/>
+         
+         
+     </LinearLayout>
+     <View 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/linegray"/>
+     <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textColor="@color/orangelight"
+            android:textSize="16sp"
+            android:text="@string/explain"/>
+        
+         <TextView 
+             android:id="@+id/tv_answer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textSize="16sp"
+            android:textColor="@color/textgraylight"/>
+        
+        
+    </LinearLayout>
+     <View 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/linegray"/>
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textSize="16sp"
+            android:textColor="@color/orangelight"
+            android:text="@string/suggestion"/>
+        
+         <TextView 
+             android:id="@+id/tv_suggestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textSize="16sp"
+            android:textColor="@color/textgraylight"/>
+        
+        
+    </LinearLayout>
+     </LinearLayout>
+     </ScrollView>
+    
+
+</LinearLayout>

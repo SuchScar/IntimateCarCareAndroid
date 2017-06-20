@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+<RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/orangelight">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/img_shangpin_detail_bac"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/shangpinxinxi"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+    <RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+     android:orientation="horizontal"
+     android:background="@drawable/auto"
+    >
+     <TextView 
+     android:id="@+id/carname_shopitem"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="路虎发现"
+    android:textSize="15dp"
+    android:textColor="@color/orangelight"
+    android:layout_marginLeft="15dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+         />    
+    <TextView 
+    android:id="@+id/car_km_shopitem"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="9500KM"
+    android:textSize="15dp"
+    android:layout_marginRight="5dp"
+    android:layout_alignParentRight="true"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+         />  
+  </RelativeLayout >
+    <ListView 
+    android:id="@+id/lis_shangpin_detail"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    ></ListView>
+</LinearLayout>

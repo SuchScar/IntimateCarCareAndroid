@@ -1,0 +1,200 @@
+package com.Activity;
+
+import java.util.Calendar;
+import java.util.HashMap;
+
+import org.json.JSONObject;
+
+import com.Bll.CBLL;
+import com.Entity.InsuranceRecord;
+import com.Entity.MaintainRecord;
+import com.Http.HttpCallback;
+import com.Http.HttpTask;
+import com.tool.JSONEntity;
+import com.tool.MyURL;
+import com.tool.ToastUtil;
+
+import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.preference.PreferenceManager.OnActivityResultListener;
+import android.text.format.DateFormat;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.view.WindowInsets;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+public class Addmaintenancedate extends Activity{
+
+	private RelativeLayout rel_data;
+	private EditText edt_feiyong,edt_snowyibiao,edt_xiangmu,edt_beizhu;
+	private LinearLayout lin_back;
+	private ImageView img_commit;
+    private TextView tv_date;
+    private String shijian,feiyong,licheng,xiangmu,beizhu;
+    
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.activity_addmaintenancedate);
+		FindView();
+		SetListen();
+	}
+	private void SetListen() {
+		// TODO Auto-generated method stub
+		lin_back.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				finish();
+			}
+		});
+		img_commit.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+
+				// TODO Auto-generated method stub
+				if(tv_date.getText().toString().isEmpty()&&
+						edt_feiyong.getText().toString().isEmpty()&&
+						edt_snowyibiao.getText().toString().isEmpty()&&
+						edt_beizhu.getText().toString().isEmpty()&&
+						edt_xiangmu.getText().toString().isEmpty()
+						){
+					ToastUtil.show(Addmaintenancedate.this, "所输信息有误！");
+				}
+				else{
+					shijian=tv_date.getText().toString();
+					feiyong=edt_feiyong.getText().toString();
+					licheng=edt_snowyibiao.getText().toString();
+					beizhu=edt_beizhu.getText().toString();
+				    xiangmu=edt_xiangmu.getText().toString();
+		    HashMap<String, String>sendinsurance=new MaintainRecord().addmaintainrecord(Addmaintenancedate.this,shijian, Integer.parseInt(feiyong), licheng,xiangmu, beizhu);
+		    new HttpTask (seninsurancecallback,MyURL.ADDMAINTENANCE).execute(sendinsurance);
+				}	   
+			
+			}
+		});
+		rel_data.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+
+				// TODO Auto-generated method stub
+				final Calendar cal = Calendar.getInstance();
+				final DatePickerDialog mDialog = new DatePickerDialog(
+						Addmaintenancedate.this, null, cal.get(Calendar.YEAR), cal
+								.get(Calendar.MONTH), cal
+								.get(Calendar.DAY_OF_MONTH));
+
+				// 手动设置按钮
+				mDialog.setButton(DialogInterface.BUTTON_POSITIVE, "完成",
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								// 通过mDialog.getDatePicker()获得dialog上的DatePicker组件，然后可以获取日期信息
+								DatePicker datePicker = mDialog.getDatePicker();
+								cal.set(datePicker.getYear(),
+										datePicker.getMonth(),
+										datePicker.getDayOfMonth());
+								tv_date.setText(DateFormat.format(
+										"yyy-MM-dd", cal));
+							}
+						});
+				// 取消按钮，如果不需要直接不设置即可
+				mDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "取消",
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								System.out.println("BUTTON_NEGATIVE~~");
+							}
+						});
+				mDialog.show();
+			
+			
+			}
+		});
+		
+		edt_xiangmu.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent=new Intent(Addmaintenancedate.this,ChooseMaintenanceItem.class);
+				startActivityForResult(intent, 1);
+				
+			}
+		});
+		
+		
+	}
+	private void FindView() {
+		// TODO Auto-generated method stub
+		rel_data=(RelativeLayout) findViewById(R.id.rel_data);
+		edt_feiyong=(EditText) findViewById(R.id.edt_feiyong);
+		edt_snowyibiao=(EditText) findViewById(R.id.edt_snowyibiao);
+		edt_xiangmu=(EditText) findViewById(R.id.edt_xiangmu);
+		edt_beizhu=(EditText) findViewById(R.id.edt_beizhu);
+		lin_back=(LinearLayout) findViewById(R.id.lin_back);
+		img_commit=(ImageView) findViewById(R.id.img_commit);
+		tv_date=(TextView) findViewById(R.id.tv_date);
+		edt_xiangmu.setFocusable(false);
+		
+	}
+	HttpCallback seninsurancecallback=new HttpCallback() {
+		
+		@Override
+		public void getResult(JSONObject json) {
+			// TODO Auto-generated method stub
+
+			// TODO Auto-generated method stub
+			CBLL cbll =CBLL.getInstance();
+			JSONEntity entity=cbll.json2addinsurance(json);
+			if(entity.isFlag()){		
+				Intent intent =new Intent();
+				intent.putExtra("shijian",shijian); 
+				intent.putExtra("feiyong",Integer.parseInt(feiyong)); 
+				intent.putExtra("licheng",Integer.parseInt(licheng));
+				intent.putExtra("xiangmu",xiangmu);
+				intent.putExtra("beizhu",beizhu);
+				ToastUtil.show(Addmaintenancedate.this,"添加成功");
+				setResult(RESULT_OK, intent);  
+		        finish();
+			}
+			else{
+				ToastUtil.show(Addmaintenancedate.this,"添加失败");
+				}
+		
+		}
+	};
+	
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		switch (requestCode) {
+		case 1:
+			if(resultCode==1){
+				String str=data.getStringExtra("item");
+				edt_xiangmu.setText(str);
+			}
+			break;
+		default:
+			break;
+		}
+	};
+	
+	
+}

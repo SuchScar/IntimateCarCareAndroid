@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     android:background="#F0F0F0"
+    android:orientation="vertical" >
+
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/orangelight">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/img_back2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/car_number"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/img_allcommit"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/lin_back"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="21dp"
+            android:src="@drawable/right" />
+
+    </RelativeLayout>
+
+<View 
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="#E0E0E0"    
+    />
+
+
+<RelativeLayout
+    android:id="@+id/rel_chepinpai"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="#ffffff"
+    android:layout_marginTop="10dp"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:layout_width="40dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="5dp"
+        android:gravity="center_vertical"
+        android:text="@string/car_pinpai" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+         android:layout_centerInParent="true"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/go" />
+
+    <TextView
+        android:id="@+id/tv_chepinpai"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="21dp"
+        android:layout_toLeftOf="@+id/imageView2"
+        android:gravity="center_vertical"
+        
+        />
+</RelativeLayout>
+
+<RelativeLayout
+    android:id="@+id/car_type"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:layout_marginTop="8dp"
+    android:orientation="horizontal"
+    >
+    <ImageView 
+         android:id="@+id/img_3"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/black_down"
+        android:layout_marginRight="15dp"
+        android:visibility="gone"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="3dp"
+      
+        />
+<ImageView
+        android:id="@+id/img_4"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="3dp"
+        android:src="@drawable/go" />
+
+<TextView
+    android:id="@+id/tv_cartype"
+    android:layout_width="wrap_content"
+    android:layout_height="35dp"
+    android:layout_alignParentTop="true"
+   android:layout_marginLeft="220dp"
+
+    android:gravity="center_vertical"
+    />
+
+<TextView
+    android:layout_width="40dp"
+    android:layout_height="35dp"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:gravity="center_vertical"
+    android:layout_marginLeft="5dp"
+    android:text="@string/chexing" />
+
+</RelativeLayout>
+   <com.tool.MyListView 
+        android:id="@+id/list_carxing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:dividerHeight="2px"
+        android:divider="#E0E0E0"    
+        ></com.tool.MyListView>
+<RelativeLayout
+    android:id="@+id/rel_vin"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:layout_marginTop="8dp"
+ 
+    >
+  
+<ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="3dp"
+        android:src="@drawable/go" />
+
+<TextView
+    android:id="@+id/tv_vin"
+    android:layout_width="wrap_content"
+    android:layout_height="35dp"
+    android:layout_alignParentTop="true"
+    android:layout_toLeftOf="@id/imageView4"
+    android:gravity="center_vertical"
+    android:text=""
+    />
+
+<TextView
+    android:layout_width="40dp"
+    android:layout_height="35dp"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:gravity="center_vertical"
+    android:layout_marginLeft="5dp"
+    android:text="@string/vinma" />
+
+</RelativeLayout>
+
+
+    <com.tool.MyListView 
+        android:id="@+id/list_carxinghao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:dividerHeight="2px"
+        android:divider="#E0E0E0"  
+        
+        ></com.tool.MyListView>
+
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:background="#ffffff"
+    android:layout_marginTop="8dp"
+    android:orientation="horizontal"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginLeft="5dp"
+        android:gravity="center_vertical"
+        android:text="@string/biansuxiang" />
+   
+     <TextView
+        android:id="@+id/tv_shoudong"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:layout_height="35dp"
+        android:gravity="center_vertical"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:background="#FFF68F"
+        android:text="手动挡" />
+     <TextView
+        android:id="@+id/tv_zidong"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_marginTop="5dp"
+        android:background="#E0E0E0"
+        android:text="自动挡" />
+</LinearLayout>
+
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="35dp"
+    android:background="#ffffff"
+    android:layout_marginTop="8dp"
+    android:orientation="horizontal"
+    >
+    <TextView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="5dp"
+        android:gravity="center_vertical"
+        android:text="排量" />
+     <EditText
+         android:id="@+id/edt_pailiang"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="170dp"
+        android:background="@drawable/pailiang"
+        android:textSize="15dp"
+       />
+    <Spinner     
+        android:id = "@+id/Spinneraa"     
+        android:layout_width = "wrap_content"     
+        android:layout_height ="wrap_content" >     
+    </Spinner >   
+</LinearLayout>
+
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="35dp"
+    android:background="#ffffff"
+    android:layout_marginTop="8dp"
+    android:orientation="horizontal"
+    >
+    <TextView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="5dp"
+        android:gravity="center_vertical"
+        android:text="@string/niankuan" />
+     <EditText
+         android:id="@+id/edt_year"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="170dp"
+        android:background="@drawable/pailiang"
+        android:textSize="15dp"
+       />
+   
+</LinearLayout>
+<RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+     android:background="#ffffff"
+    android:layout_marginTop="5dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+       
+        android:textSize="18sp"
+        android:textColor="@color/textgraydark"
+        android:text="@string/yxrl" />
+
+ <EditText
+      android:id="@+id/edt_youxiang"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="65dp"   
+        android:background="@drawable/pailiang"
+        android:textSize="15dp"
+       />
+  <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:textSize="18sp"
+        android:layout_marginRight="35dp"
+        android:textColor="@color/textgraydark"
+        android:text="L" />
+</RelativeLayout>
+<RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+     android:background="#ffffff"
+    android:layout_marginTop="5dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:textSize="18sp"
+        android:textColor="@color/textgraydark"
+        android:text="@string/newlicheng" />
+
+ <EditText
+        android:id="@+id/edt_licheng"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="65dp"
+      
+        android:background="@drawable/pailiang"
+        android:textSize="15dp"
+       />
+  <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:textSize="18sp"
+        android:layout_marginRight="27dp"
+        android:textColor="@color/textgraydark"
+        android:text="KM" />
+</RelativeLayout>
+<LinearLayout 
+    android:id="@+id/girdviewlistent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="bottom"
+    android:visibility="gone"
+    android:layout_marginTop="190dp"
+    >
+
+    <GridView
+        android:id="@+id/gridview"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:paddingTop="8dp"
+        android:gravity="center"
+        android:horizontalSpacing="10dp"
+        android:numColumns="9"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="5dp" >
+    </GridView>
+
+</LinearLayout>
+</LinearLayout>

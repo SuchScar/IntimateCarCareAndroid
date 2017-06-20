@@ -1,0 +1,151 @@
+package com.Activity;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.json.JSONObject;
+
+import com.Adapter.ActivityYearInspectionAdapter;
+import com.Adapter.ActivityinsurancedateAdapter;
+import com.Bll.CBLL;
+import com.Entity.AnnualInspection;
+import com.Entity.AnnualInspectionSet;
+import com.Entity.InsuranceRecord;
+import com.Entity.InsuranceRecordSet;
+import com.Entity.Merchant;
+import com.Http.HttpCallback;
+import com.Http.HttpTask;
+import com.tool.JSONEntity;
+import com.tool.MyURL;
+import com.tool.SPUtils;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.AdapterView.OnItemSelectedListener;
+
+public class YearInspection extends Activity{
+ 
+	private ActivityYearInspectionAdapter adapter;
+	private ListView listview;
+    private ImageView img_commit;
+    private LinearLayout lin_back;
+    private AnnualInspectionSet list;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.activity_yearinspection);
+		initview();
+		setlisten();
+		RequestData();
+	}
+	private void initview() {
+		// TODO Auto-generated method stub
+		listview=(ListView)findViewById(R.id.listview);
+		img_commit=(ImageView)findViewById(R.id.img_commit);
+		lin_back=(LinearLayout)findViewById(R.id.lin_back);
+	}
+	private void setlisten() {
+		// TODO Auto-generated method stub
+    lin_back.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				finish();
+			}
+		});
+    img_commit.setOnClickListener(new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			Intent intent =new Intent(YearInspection.this,AddYearInspection.class);	
+			startActivityForResult(intent, 1);
+		}
+	});
+    
+	listview.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+		@Override
+		public void onItemSelected(AdapterView<?> arg0, View arg1,
+				int arg2, long arg3) {
+			// TODO Auto-generated method stub
+		
+	   //  System.out.println("IIIIIIIIIII"+list.getItem(arg2).getIrecord_id());   
+		}
+
+		@Override
+		public void onNothingSelected(AdapterView<?> arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+	});
+	}
+	private void RequestData() {
+		// TODO Auto-generated method stub
+	    HashMap<String, String> getinsurancedate = new Merchant().getmerchant
+	    (SPUtils.get(YearInspection.this, "userId", -1).toString(),SPUtils.get(YearInspection.this, "userTokens", "").toString(),1,10);
+	//	new HttpTask(myyearinspectionCallback, MyURL.INSURANCERECORD).execute(getinsurancedate);
+	}
+	HttpCallback myyearinspectionCallback=new HttpCallback() {
+		
+		@Override
+		public void getResult(JSONObject json) {
+			// TODO Auto-generated method stub
+			CBLL cbll= CBLL.getInstance();
+			JSONEntity entity=cbll.json2yearinspection(json);
+			if(entity.isFlag()){
+				 list =(AnnualInspectionSet) entity.getData();
+					adapter = new ActivityYearInspectionAdapter(YearInspection.this, list);
+					listview.setAdapter(adapter);
+				}
+			}
+		
+	};
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		switch (requestCode) {
+
+		case 1:
+			if(resultCode==RESULT_OK){
+			 String	nowdata=data.getStringExtra("nowdata");
+			 String	nextdata=data.getStringExtra("nextdata");
+			 String	feiyong=data.getStringExtra("feiyong");
+			 String	beizhu=data.getStringExtra("beizhu");
+			
+				if(list==null){
+					List<AnnualInspection>l=new ArrayList<AnnualInspection>();		
+					l.add(new AnnualInspection(nowdata,nextdata,Integer.parseInt(feiyong),beizhu));
+					list=new AnnualInspectionSet(l);	
+					adapter.notifyDataSetChanged();
+				}else{
+				  //获取之前的List数据
+					List<AnnualInspection>ll=list.getAnnualInspectionList();
+					ll.add(new AnnualInspection(nowdata,nextdata,Integer.parseInt(feiyong),beizhu));	
+					list=new AnnualInspectionSet(ll);	
+				//	adapter = new ActivityinsurancedateAdapter(InsuranceDate.this, list);
+					adapter.notifyDataSetChanged();
+				
+				}
+					
+			}
+			break;
+
+		default:
+			break;
+		}
+	}
+}

@@ -1,0 +1,177 @@
+package com.Fragment;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import org.json.JSONObject;
+import com.Adapter.ActivityHistoryCarReportListAdapter;
+import com.Adapter.FragmentRemindAdapter;
+import com.Bll.CBLL;
+import com.Entity.CarReportBrief;
+import com.Entity.CarReportBriefSet;
+import com.Entity.Remind;
+import com.Entity.RemindSet;
+import com.Entity.UserEntity;
+import com.Http.HttpCallback;
+import com.Http.HttpTask;
+import com.IntimateCarCare.HistoryCarReportListActivity;
+import com.IntimateCarCare.R;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
+import com.tool.JSONEntity;
+import com.tool.MyURL;
+import com.tool.SPUtils;
+import com.tool.ToastUtil;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ListFragment;
+import android.telephony.gsm.GsmCellLocation;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+public class FirstRemindFragment extends ListFragment {
+
+	private PullToRefreshListView refreshlistview;
+	private RemindSet list;
+	private FragmentRemindAdapter adapter;
+	private HashMap<String, String> map;
+	private int level;
+	private int PAGE = 1;
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		View view = inflater.inflate(R.layout.fragment_firstremind, null);
+		findview(view);
+		return view;
+	}
+
+	private void findview(View view) {
+		// TODO Auto-generated method stub
+		refreshlistview = (PullToRefreshListView) view
+				.findViewById(R.id.refreshlistview);
+		// refreshlistview.setMode(Mode.BOTH);//可上拉下拉
+		refreshlistview.setMode(Mode.DISABLED);// 取消刷新
+	}
+
+	@Override
+	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+		level = getArguments().getInt("level");
+
+		RequestData();
+		setListen();
+
+	}
+
+	@SuppressWarnings("unchecked")
+	private void RequestData() {
+		// TODO Auto-generated method stub
+		map = new UserEntity().getIdTaken(getActivity());
+		map.put("level", level + "");
+		new HttpTask(remindlistCallback, MyURL.REMIND,getActivity()).execute(map);
+
+	}
+
+//	@SuppressWarnings("unchecked")
+//	protected void Requestmore(int page) {
+//		// TODO Auto-generated method stub
+//		map.put("page", page + "");
+//		new HttpTask(moreremindlistCallback, MyURL.REMIND).execute(map);
+//	}
+
+	private HttpCallback remindlistCallback = new HttpCallback() {
+		@SuppressWarnings("unchecked")
+		@Override
+		public void getResult(JSONObject json) {
+			// TODO Auto-generated method stub
+			CBLL cbll = CBLL.getInstance();
+			JSONEntity entity = cbll.json2remindlist(json,getActivity(),level);
+			if (entity.isFlag()) {
+				list = (RemindSet) entity.getData();
+				adapter=new FragmentRemindAdapter(getActivity(), list);
+				refreshlistview.setAdapter(adapter);
+			} else {
+				if (entity.getMessage() == MyURL.MSG_OTHERS_ERROR) {
+					ToastUtil.show(getActivity(), "获取失败");
+				} else if (entity.getMessage() == MyURL.MSG_TOKENS_ERROR) {
+					ToastUtil.show(getActivity(), "您的账号在别的地方登陆，请重新登录");
+					// 重启app
+					restartApplication();
+				}
+			}
+
+		}
+	};
+
+//	private HttpCallback moreremindlistCallback = new HttpCallback() {
+//
+//		@Override
+//		public void getResult(JSONObject json) {
+//			// TODO Auto-generated method stub
+//			CBLL cbll = CBLL.getInstance();
+//			JSONEntity entity = cbll.json2remindlist(json);
+//			if (entity.isFlag()) {
+//				list = (RemindSet) entity.getData();
+//				adapter = new FragmentRemindAdapter(getActivity(), list);
+//				refreshlistview.setAdapter(adapter);
+//				refreshlistview.onRefreshComplete();
+//				if (refreshlistview.getMode() == Mode.PULL_FROM_START) {
+//					refreshlistview.setMode(Mode.BOTH);// 可上拉下拉
+//				}
+//
+//			} else {
+//				if (entity.getMessage() == MyURL.MSG_OTHERS_ERROR) {
+//					ToastUtil.show(getActivity(), "获取失败");
+//				} else if (entity.getMessage() == MyURL.MSG_TOKENS_ERROR) {
+//					ToastUtil.show(getActivity(), "您的账号在别的地方登陆，请重新登录");
+//					// 重启app
+//					restartApplication();
+//				}
+//			}
+//		}
+//	};
+
+	private void setListen() {
+		// TODO Auto-generated method stub
+//		refreshlistview
+//				.setOnRefreshListener(new OnRefreshListener2<ListView>() {
+//
+//					@Override
+//					public void onPullDownToRefresh(
+//							PullToRefreshBase<ListView> refreshView) {
+//						// TODO Auto-generated method stub
+//						RequestData();
+//						PAGE = 1;
+//					}
+//
+//					@Override
+//					public void onPullUpToRefresh(
+//							PullToRefreshBase<ListView> refreshView) {
+//						// TODO Auto-generated method stub
+//						PAGE++;
+//						Requestmore(PAGE);
+//					}
+//
+//				});
+	}
+
+	// 重启app
+	private void restartApplication() {
+		final Intent intent = getActivity().getPackageManager()
+				.getLaunchIntentForPackage(getActivity().getPackageName());
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(intent);
+	}
+}

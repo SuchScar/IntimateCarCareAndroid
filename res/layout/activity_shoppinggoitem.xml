@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/orangelight" >
+
+        <ImageView
+            android:id="@+id/img_shangcheng_back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/baoyang"
+            android:id="@+id/tv_logo"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+         
+    </RelativeLayout>
+  <RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+     android:orientation="horizontal"
+    >
+     <TextView 
+     android:id="@+id/carname_shopitem"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="路虎发现"
+    android:textSize="15dp"
+    android:textColor="@color/orangelight"
+    android:layout_marginLeft="15dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+         />    
+    <TextView 
+    android:id="@+id/car_km_shopitem"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text=""
+    android:textSize="15dp"
+    android:layout_toLeftOf="@+id/km"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+         />  
+         
+       <TextView 
+    android:id="@+id/km"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="KM"
+    android:textSize="15dp"
+    android:layout_marginRight="5dp"
+    android:layout_alignParentRight="true"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+         />
+  </RelativeLayout >  
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+     android:orientation="horizontal"
+    >
+
+    <RelativeLayout
+        android:id="@+id/rel_distant"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@drawable/auto"
+        android:layout_weight="1" >
+
+        <TextView
+            android:id="@+id/tv_distents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="18dp"
+            android:text="距离" />
+
+        <ImageView
+            android:id="@+id/img_distents"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignBottom="@+id/tv_distents"
+            android:layout_toRightOf="@+id/tv_distents"
+            android:src="@drawable/sctb" />
+
+    </RelativeLayout>
+       
+    
+    
+     <RelativeLayout 
+    android:id="@+id/rel_price"     
+    android:layout_width="0dp"
+    android:layout_height="40dp"
+    android:layout_weight="1"
+    android:background="@drawable/auto"
+       >
+      <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="18dp"
+            android:text="价格" />
+
+        <ImageView
+            android:id="@+id/img_price"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignBottom="@+id/tv_price"
+            android:layout_toRightOf="@+id/tv_price"
+            android:src="@drawable/sctb" />
+         
+     </RelativeLayout> 
+  
+    
+</LinearLayout>
+<com.handmark.pulltorefresh.library.PullToRefreshListView  
+        xmlns:ptr="http://schemas.android.com/apk/res-auto"  
+        android:id="@+id/refreshlistview"  
+        android:layout_width="match_parent"  
+        android:layout_height="match_parent"  
+        ptr:ptrDrawable="@drawable/default_ptr_flip"   
+        ptr:ptrAnimationStyle="flip"  
+        ptr:ptrHeaderBackground="@color/white"  
+        ptr:ptrHeaderTextColor="@color/textgraydark" 
+        />
+</LinearLayout>

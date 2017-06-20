@@ -1,0 +1,258 @@
+package com.IntimateCarCare;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import org.json.JSONObject;
+import com.Adapter.ActivityAllCarClassifyAdapter;
+import com.Bll.CBLL;
+import com.Entity.Car;
+import com.Entity.UserEntity;
+import com.Http.HttpCallback;
+import com.Http.HttpTask;
+import com.tool.CharacterParser;
+import com.tool.JSONEntity;
+import com.tool.MyURL;
+import com.tool.PinyinComparator;
+import com.tool.SideBar;
+import com.tool.SideBar.OnTouchingLetterChangedListener;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.view.ViewGroup.MarginLayoutParams;
+import android.view.Window;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+
+
+/**
+ * @author
+ * 
+ */
+public class AllCarClassify extends Activity  {
+	private ListView sortListView;
+	private SideBar sideBar; // 右边的引导栏
+	private ActivityAllCarClassifyAdapter adapter; // 排序的�?配器
+	private TextView dialog;
+	private CharacterParser characterParser;
+	private List<Car> SourceDateList; // 数据
+    private  List<Car> list=new ArrayList<Car>();
+    private  List<Car> list2=new ArrayList<Car>();
+	private PinyinComparator pinyinComparator;
+	private LinearLayout xuanfuLayout; // 顶部悬浮的layout
+	private int lastFirstVisibleItem = -1;
+	private TextView xuanfaText; // 悬浮的文字， 和右上角的群�?	private int lastFirstVisibleItem = -1;
+	private boolean isNeedChecked; // 是否�?��出现选择的按�?
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.activity_allcarclassify);
+		initViews();
+		RequestData();
+		setListen();
+	}
+
+	private void setListen() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	private void RequestData() {
+		// TODO Auto-generated method stub
+		HashMap<String, String> idtakjson = new UserEntity()
+		.getIdTaken(AllCarClassify.this);
+		new HttpTask(allcarclassify,MyURL.ALLBRANDS,AllCarClassify.this).execute(idtakjson);
+	}
+   HttpCallback allcarclassify=new HttpCallback() {
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public void getResult(JSONObject json) {
+		// TODO Auto-generated method stub
+		CBLL cbll=CBLL.getInstance();
+		JSONEntity entity=cbll.json2getallcar(json);
+		if(entity.isFlag()){
+			list=(List<Car>) entity.getData();
+			list2=(List<Car>) entity.getData();
+			list=filledData(list);
+		 adapter = new ActivityAllCarClassifyAdapter(AllCarClassify.this, list);
+		 Collections.sort(list, pinyinComparator);
+	     sortListView.setAdapter(adapter);
+	     /**
+			 * 设置滚动监听�?实时跟新悬浮的字母的�?		 */
+			sortListView.setOnScrollListener(new OnScrollListener() {
+
+				@Override
+				public void onScrollStateChanged(AbsListView view, int scrollState) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void onScroll(AbsListView view, int firstVisibleItem,
+						int visibleItemCount, int totalItemCount) {
+					int section = adapter.getSectionForPosition(firstVisibleItem);
+					int nextSecPosition = adapter
+							.getPositionForSection(section + 1);
+					if (firstVisibleItem != lastFirstVisibleItem) {
+						MarginLayoutParams params = (MarginLayoutParams) xuanfuLayout
+								.getLayoutParams();
+						params.topMargin = 0;
+						xuanfuLayout.setLayoutParams(params);
+						xuanfaText.setText(String.valueOf((char) section));
+					}
+					if (nextSecPosition == firstVisibleItem + 1) {
+						View childView = view.getChildAt(0);
+						if (childView != null) {
+							int titleHeight = xuanfuLayout.getHeight();
+							int bottom = childView.getBottom();
+							MarginLayoutParams params = (MarginLayoutParams) xuanfuLayout
+									.getLayoutParams();
+							if (bottom < titleHeight) {
+								float pushedDistance = bottom - titleHeight;
+								params.topMargin = (int) pushedDistance;
+								xuanfuLayout.setLayoutParams(params);
+							} else {
+								if (params.topMargin != 0) {
+									params.topMargin = 0;
+									xuanfuLayout.setLayoutParams(params);
+								}
+							}
+						}
+					}
+					lastFirstVisibleItem = firstVisibleItem;
+				}
+			});
+		 }
+		
+		}
+	
+};
+	private void initViews() {
+		characterParser = CharacterParser.getInstance();//中文转拼音转换类
+
+		pinyinComparator = new PinyinComparator();
+		xuanfuLayout = (LinearLayout) findViewById(R.id.top_layout);
+		xuanfaText = (TextView) findViewById(R.id.top_char);
+		sideBar = (SideBar) findViewById(R.id.sidrbar);
+		dialog = (TextView) findViewById(R.id.dialog);
+		
+		sideBar.setTextView(dialog);
+
+		/**
+		 * 为右边添加触摸事�?		 */
+		sideBar.setOnTouchingLetterChangedListener(new OnTouchingLetterChangedListener() {
+
+			public void onTouchingLetterChanged(String s) {
+				int position = adapter.getPositionForSection(s.charAt(0));
+				if (position != -1) {
+					sortListView.setSelection(position);
+				}
+
+			}
+		});
+
+		sortListView = (ListView) findViewById(R.id.country_lvcountry);
+		sortListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				
+				  Intent intent = new Intent();  
+				  intent.putExtra("carname",list.get(position).getBrand_name());
+				  intent.putExtra("brandid",list2.get(position).getBrand_id());
+			
+	              setResult(RESULT_OK, intent);  
+	              finish();  
+				
+			/*	if (!isNeedChecked) {
+					Toast.makeText(getApplication(),
+							((SortModel) adapter.getItem(position)).getName(),
+							Toast.LENGTH_SHORT).show();
+				} else {
+					SourceDateList.get(position).setChecked(
+							!SourceDateList.get(position).isChecked());
+					adapter.notifyDataSetChanged(); // 这样写效率很低， 以后可以改成
+													// RecycleView 直接notify
+													// item的状�?				}*/
+
+			}
+
+		});
+
+		//String[] SourceDateList = filledData(getResources().getStringArray(R.array.date));// 填充数据
+		//ss	adapter = new ActivityAllCarClassifyAdapter(this, SourceDateList);
+	    //Collections.sort(list.getCarList(), pinyinComparator);
+	
+		//sortListView.setAdapter(adapter);
+
+		
+
+	}
+
+	/**
+	 * 填充数据
+	 * 
+	 * @param date
+	 * @return
+	 */
+	private List<Car> filledData(List<Car> date) {
+		List<Car> mSortList = new ArrayList<Car>();
+
+		for (int i = 0; i < date.size(); i++) {
+			Car sortModel = new Car();
+			sortModel.setBrand_name(date.get(i).getBrand_name());
+			String pinyin = characterParser.getSelling(date.get(i).getBrand_name());
+			String sortString = pinyin.substring(0, 1).toUpperCase();
+
+			if (sortString.matches("[A-Z]")) {
+				sortModel.setSortLetters(sortString.toUpperCase());
+			} else {
+				sortModel.setSortLetters("#");
+			}
+
+			mSortList.add(sortModel);
+		}
+		return mSortList;
+
+	}
+
+	/**
+	 * 过滤数据
+	 * @param filterStr
+	 */
+	private void filterData(String filterStr) {
+		List<Car> filterDateList = new ArrayList<Car>();
+
+		if (TextUtils.isEmpty(filterStr)) {
+			filterDateList = list;
+		} else {
+			filterDateList.clear();
+			for (Car sortModel : list) {
+				String name = sortModel.getBrand_name();
+				if (name.indexOf(filterStr.toString()) != -1
+						|| characterParser.getSelling(name).startsWith(
+								filterStr.toString())) {
+					filterDateList.add(sortModel);
+				}
+			}
+		}
+
+		Collections.sort(list, pinyinComparator);
+		adapter.updateListView(list);
+	}
+
+
+
+}

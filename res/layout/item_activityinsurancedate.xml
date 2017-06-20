@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+<RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/auto"
+    >
+   <TextView 
+       android:id="@+id/tv_data"
+       android:layout_centerVertical="true"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text=""
+       /> 
+   <ImageView 
+       android:id="@+id/xiugai"
+       android:layout_width="20dp"
+       android:layout_height="30dp"
+       android:src="@drawable/xiugai"
+       android:layout_alignParentRight="true"
+       android:layout_marginRight="10dp"
+       /> 
+</RelativeLayout>
+<RelativeLayout 
+     android:layout_width="match_parent"
+     android:layout_height="40dp"
+    >
+  <TextView 
+      android:id="@+id/danhao"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_centerVertical="true"
+     android:text="交强险单号："
+     android:textStyle="bold"
+     android:layout_marginLeft="5dp"
+      />  
+    <TextView
+     android:id="@+id/tv_danhao" 
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_toRightOf="@+id/danhao"
+     android:text=""
+     android:textColor="@color/textgraydark"
+     android:layout_centerVertical="true"
+        />
+</RelativeLayout>
+
+<RelativeLayout 
+     android:layout_width="match_parent"
+     android:layout_height="40dp"
+    >
+  <TextView 
+      android:id="@+id/danwei"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_centerVertical="true"
+     android:text="投保单位："
+     android:textStyle="bold"
+     android:layout_marginLeft="5dp"
+      />  
+    <TextView
+     android:id="@+id/tv_danwei" 
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_toRightOf="@+id/danwei"
+     android:text=""
+     android:textColor="@color/textgraydark"
+     android:layout_centerVertical="true"
+        />
+</RelativeLayout>
+
+
+<RelativeLayout 
+     android:layout_width="match_parent"
+     android:layout_height="40dp"
+    >
+  <TextView 
+      android:id="@+id/daoqi"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_centerVertical="true"
+     android:text="保险到期日期："
+     android:textStyle="bold"
+     android:layout_marginLeft="5dp"
+      />  
+    <TextView
+     android:id="@+id/tv_daoqi" 
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_toRightOf="@+id/daoqi"
+     android:text=""
+     android:textColor="@color/textgraydark"
+     android:layout_centerVertical="true"
+        />
+</RelativeLayout>
+
+<RelativeLayout 
+     android:layout_width="match_parent"
+     android:layout_height="40dp"
+    >
+  <TextView 
+      android:id="@+id/feiyong"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_centerVertical="true"
+     android:text="保险费用："
+     android:textStyle="bold"
+     android:layout_marginLeft="5dp"
+      />  
+    <TextView
+     android:id="@+id/tv_feiyong" 
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_toRightOf="@+id/feiyong"
+     android:text=""
+     android:textColor="@color/textgraydark"
+     android:layout_centerVertical="true"
+        />
+</RelativeLayout>
+<RelativeLayout 
+     android:layout_width="match_parent"
+     android:layout_height="40dp"
+    >
+  <TextView 
+      android:id="@+id/beizhu"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_centerVertical="true"
+     android:text="备注："
+     android:textStyle="bold"
+     android:layout_marginLeft="5dp"
+      />  
+    <TextView
+     android:id="@+id/tv_beizhu" 
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_toRightOf="@+id/beizhu"
+     android:text=""
+     android:textColor="@color/textgraydark"
+     android:layout_centerVertical="true"
+        />
+</RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,20 @@
+package com.Activity;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Window;
+import android.widget.RelativeLayout;
+
+public class Addmaintenancedate extends Activity{
+
+	private RelativeLayout rel_data;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.activity_addmaintenancedate);
+		rel_data=(RelativeLayout) findViewById(R.id.rel_data);
+	}
+	
+}

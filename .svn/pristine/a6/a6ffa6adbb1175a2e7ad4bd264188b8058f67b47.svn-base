@@ -1,0 +1,35 @@
+package com.IntimateCarCare;
+
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Window;
+
+public class FunctionIntroduction extends Activity {
+
+	
+  @Override
+protected void onCreate(Bundle savedInstanceState) {
+	// TODO Auto-generated method stub
+	super.onCreate(savedInstanceState);
+    requestWindowFeature(Window.FEATURE_NO_TITLE);
+    setContentView(R.layout.activity_functionintroduction);
+    
+    DisplayMetrics dm=new DisplayMetrics();//创建矩阵  
+    getWindowManager().getDefaultDisplay().getMetrics(dm);
+    findview(); 
+
+    setlistent();
+}
+private void setlistent() {
+	// TODO Auto-generated method stub
+	
+}
+private void findview() {
+	// TODO Auto-generated method stub
+	
+}
+
+
+}

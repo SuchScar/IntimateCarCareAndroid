@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/orangelight">
+
+        <LinearLayout
+            android:id="@+id/lin_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/my_red_paper"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rel_change_car"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/backgray" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:text="@string/redpaperaccount"
+            android:textColor="@color/orangelight"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/textView1"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_rednum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1888" 
+                android:textColor="@color/textgraydark"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textgraydark"
+                android:text="元"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </RelativeLayout>
+    
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/orangelight"/>
+
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        
+        <Button
+            android:id="@+id/but_redpaper_use"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="35dp"
+            android:layout_margin="20dp"
+            android:text="@string/use"
+            android:textColor="@color/white"
+            android:background="@drawable/corner_lightorange"/>
+        <Button
+            android:id="@+id/but_redpaper_add"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="35dp"
+            android:layout_margin="20dp"
+            android:text="@string/add"
+            android:textColor="@color/white"
+            android:background="@drawable/corner_lightorange"/>
+        
+    </LinearLayout>
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/linegray"/>
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+        <LinearLayout 
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="2dp"
+                android:text="@string/yihuode"/>
+            <TextView 
+                android:id="@+id/tv_getnum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="200元"/>
+            
+        </LinearLayout>
+        <View 
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/linegray"
+            />
+        <LinearLayout 
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView 
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/yishiyong"/>
+            <TextView 
+                android:id="@+id/tv_usenum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="200元"/>
+            
+        </LinearLayout>
+         <View 
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/linegray"
+            />
+        <LinearLayout 
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView 
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/yiguopqi"/>
+            <TextView 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="0元"/>
+            
+        </LinearLayout>
+        
+        
+        
+    </LinearLayout>
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/linegray"/>
+   
+     <com.handmark.pulltorefresh.library.PullToRefreshListView  
+        xmlns:ptr="http://schemas.android.com/apk/res-auto"  
+        android:id="@+id/refreshlistview"  
+        android:layout_width="match_parent"  
+        android:layout_height="match_parent"  
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        ptr:ptrDrawable="@drawable/default_ptr_flip"   
+        ptr:ptrAnimationStyle="flip"  
+        ptr:ptrHeaderBackground="@color/white"  
+        ptr:ptrHeaderTextColor="@color/textgraydark" 
+        />
+    
+    
+    
+  
+
+</LinearLayout>

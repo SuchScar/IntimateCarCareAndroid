@@ -1,0 +1,117 @@
+package com.Activity;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.json.JSONObject;
+
+import com.Activity.R;
+import com.Adapter.ActivityCommodityNewsadapter;
+import com.Adapter.ActivityMyShoppingadapter;
+import com.Bll.CBLL;
+import com.Entity.Goods;
+import com.Entity.GoodsSet;
+import com.Entity.Merchant;
+import com.Entity.MerchantSet;
+import com.Http.HttpCallback;
+import com.Http.HttpTask;
+import com.tool.JSONEntity;
+import com.tool.MyURL;
+import com.tool.SPUtils;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.view.View;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+
+public class CommodityNewsActivity  extends Activity{
+	
+	private ListView lis_shangpin_detail;
+	private ImageView img_shangpin_detail_bac;
+	private GoodsSet list;
+	private ActivityCommodityNewsadapter adapter;
+   @Override
+protected void onCreate(Bundle savedInstanceState) {
+	// TODO Auto-generated method stub
+	super.onCreate(savedInstanceState);
+	requestWindowFeature(Window.FEATURE_NO_TITLE);
+	setContentView(R.layout.activity_commoditynews);
+	
+	
+	RequestMainData();
+	initview();
+	setListen();
+	
+	/*adapter=new ActivityCommodityNewsadapter(CommodityNewsActivity.this,list);
+	lis_shangpin_detail.setAdapter(adapter);*/
+}
+private void RequestMainData() {
+	// TODO Auto-generated method stub
+	HashMap<String, String> allgoods=new Merchant().getmerchant(SPUtils.get(CommodityNewsActivity.this, "userId", -1).toString(),SPUtils.get(CommodityNewsActivity.this, "userTokens", "").toString(),1,10);	 
+    //获得商品有关数据
+    new HttpTask(goodsCallback, MyURL.GOODS).execute(allgoods);
+}
+
+private HttpCallback goodsCallback=new HttpCallback() {
+	
+	@Override
+	public void getResult(JSONObject json) {
+		// TODO Auto-generated method stub
+
+		// TODO Auto-generated method stub
+		CBLL cBllmerchant = CBLL.getInstance();
+		JSONEntity entity = cBllmerchant.json2goods(json);
+	  if(entity.isFlag()){	
+	  GoodsSet goodslist = (GoodsSet) entity.getData();//将数据都放进set方法中
+      List<Goods>l=new ArrayList<Goods>();	//一个实体类的list
+	  for(int i=0; i<goodslist.getSize(); i++){	 //循环set方法
+		  Goods goodsentity = goodslist.getItem(i);//获取每一项实体类中全部的值
+				
+			l.add(goodsentity);
+			list=new GoodsSet(l);
+			adapter = new ActivityCommodityNewsadapter(CommodityNewsActivity.this, list);
+			lis_shangpin_detail.setAdapter(adapter);	
+			SPUtils.put(CommodityNewsActivity.this, "goodsid",goodsentity.getGoods_id() );		
+			
+		}
+	
+	}
+
+	}
+};
+/*private void getData() {
+	// TODO Auto-generated method stub
+	List<Goods>l=new ArrayList<Goods>();
+	for(int i=0;i<10;i++){
+	l.add(new Goods("空气滤芯",Float.parseFloat("800"),"万里汽修"));
+		
+	}
+	list=new GoodsSet(l);
+}*/
+private void setListen() {
+	// TODO Auto-generated method stub
+	lis_shangpin_detail.setOnItemClickListener(new OnItemClickListener() {
+
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+				long arg3) {
+			// TODO Auto-generated method stub
+			Intent intent =new Intent(CommodityNewsActivity.this,Shopping_Detail.class);	
+			startActivity(intent);
+		}
+	});
+}
+private void initview() {
+	// TODO Auto-generated method stub
+	img_shangpin_detail_bac=(ImageView)findViewById(R.id.img_shangpin_detail_bac);
+	lis_shangpin_detail =(ListView)findViewById(R.id.lis_shangpin_detail);
+}
+}

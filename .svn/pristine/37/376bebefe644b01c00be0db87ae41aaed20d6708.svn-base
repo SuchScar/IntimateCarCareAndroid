@@ -1,0 +1,89 @@
+# view AndroidManifest.xml #generated:67
+-keep class com.Activity.AddLicenseplateActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:66
+-keep class com.Activity.AllCarClassify { <init>(...); }
+
+# view AndroidManifest.xml #generated:61
+-keep class com.Activity.AreaActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:72
+-keep class com.Activity.CarConfiguration { <init>(...); }
+
+# view AndroidManifest.xml #generated:71
+-keep class com.Activity.ChangeCarConfiguration { <init>(...); }
+
+# view AndroidManifest.xml #generated:70
+-keep class com.Activity.ChangeCarNumberActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:68
+-keep class com.Activity.GPSActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:75
+-keep class com.Activity.IntelligentBoxManage { <init>(...); }
+
+# view AndroidManifest.xml #generated:58
+-keep class com.Activity.LoginActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:49
+-keep class com.Activity.MainActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:59
+-keep class com.Activity.MyActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:69
+-keep class com.Activity.MyCarSetting { <init>(...); }
+
+# view AndroidManifest.xml #generated:62
+-keep class com.Activity.MyRedPaprerActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:76
+-keep class com.Activity.MyShopping { <init>(...); }
+
+# view AndroidManifest.xml #generated:60
+-keep class com.Activity.MyinfoActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:65
+-keep class com.Activity.MyweatherActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:74
+-keep class com.Activity.PurchaseRecordActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:64
+-keep class com.Activity.RegisterActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:79
+-keep class com.Activity.SearchMyShopping { <init>(...); }
+
+# view AndroidManifest.xml #generated:78
+-keep class com.Activity.Shangjia_Detail { <init>(...); }
+
+# view AndroidManifest.xml #generated:77
+-keep class com.Activity.ShoppingGoItem { <init>(...); }
+
+# view AndroidManifest.xml #generated:63
+-keep class com.Activity.SoftSettingActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:73
+-keep class com.Activity.VINnumberActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:88
+-keep class com.baidu.location.f { <init>(...); }
+
+# view res/layout/activity_gps.xml #generated:8
+-keep class com.baidu.mapapi.map.MapView { <init>(...); }
+
+# view res/layout/activity_gps.xml #generated:15
+# view res/layout/activity_gps.xml #generated:253
+# view res/layout/activity_main.xml #generated:430
+# view res/layout/activity_myinfo.xml #generated:48
+-keep class com.tool.CircleImageView { <init>(...); }
+
+# view res/layout/activity_addlicenseplate.xml #generated:171
+# view res/layout/activity_changecarconfiguration.xml #generated:138
+# view res/layout/activity_changecarconfiguration.xml #generated:184
+-keep class com.tool.MyListView { <init>(...); }
+
+# view res/layout/activity_allcarclassify.xml #generated:76
+-keep class com.tool.SideBar { <init>(...); }
+

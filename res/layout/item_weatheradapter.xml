@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="22dp"
+        >
+ 
+        <TextView
+            android:id="@+id/timmer"
+            android:textColor="#FFFFFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="7dp"
+            android:text="2016-12-08  " />
+
+        <TextView
+            android:id="@+id/week"
+             android:textColor="#FFFFFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="7dp"
+            android:layout_toRightOf="@+id/timmer"
+            android:layout_marginLeft="3dp"
+            android:text="星期四" />
+
+        <ImageView
+            android:id="@+id/weatherimage"
+            android:layout_width="25dp"
+            android:layout_height="27dp"
+            android:layout_toRightOf="@+id/week"
+            android:paddingTop="5dp"
+            android:src="@drawable/cloudy" />
+
+        <TextView
+            android:id="@+id/weathercondition"
+             android:textColor="#FFFFFF"
+             android:layout_toRightOf="@+id/weatherimage" 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:paddingTop="7dp"
+            android:text="晴" />
+
+        <TextView
+            android:id="@+id/temperture"
+             android:textColor="#FFFFFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:paddingTop="7dp"
+            android:layout_toRightOf="@+id/weathercondition" 
+            android:text="27℃-32℃" />
+
+        <TextView
+            android:id="@+id/washcar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:paddingTop="7dp"
+          android:layout_alignParentRight="true"
+             android:textColor="#FFFFFF"
+            android:text="宜洗车" />
+    </RelativeLayout>
+
+
+</LinearLayout>

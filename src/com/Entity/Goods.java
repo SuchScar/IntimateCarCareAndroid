@@ -1,0 +1,224 @@
+package com.Entity;
+
+import java.util.HashMap;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.Context;
+
+import com.tool.SPUtils;
+
+public class Goods {
+
+	private int goods_id;				//商品id
+	private String name;				//商品名称
+	private String type;				//商品类型
+	private float money;				//价格
+	private String desc;				//商品描述
+	private int state;					//商品状态（是否下架）
+	private Preferential preferential;  //优惠措施 
+	private Picture pictures;			//图片集合
+	private String revise_time;			//最后修改时间
+	
+	private Merchant merchant;			//商家
+	private int tel_times;				//打电话次数
+	private int guide_times;			//导航次数
+	
+	
+	
+	public Goods(){
+		Merchant mer=new Merchant();
+		Picture pic=new Picture();
+		Preferential pre=new Preferential();
+		this.merchant=mer;
+		this.pictures=pic;
+		this.preferential=pre;
+	
+	}
+	public Goods(String string1,Float string2,String string3){
+		this.name=string1;
+		this.money=string2;
+		Merchant m=new Merchant();
+		m.setName(string3);
+		this.merchant=m;	
+		
+	}
+ 
+	//获商品详情的列表
+	public HashMap<String, String>getgoods(String UserId, String Tokens ,String GoodsId) {
+		HashMap<String, String> json = new HashMap<String, String>();
+		json.put("user_id", UserId);
+		json.put("tokens",Tokens);
+        json.put("goods_id","" + GoodsId);      
+		return json;
+	}
+	
+	public HashMap<String, String> getgoodsdetail(Context context){
+		HashMap<String, String> map=new HashMap<String, String>();
+		map.put("user_id",SPUtils.get(context, "userId", -1).toString());
+		map.put("tokens",SPUtils.get(context, "userTokens", "").toString());
+	
+		
+		return map; 
+	}
+	
+	public Goods(JSONObject goods,int i) {
+		// TODO Auto-generated constructor stub
+		try {
+
+			/*if(i==1){ //解析 goods
+			this.goods_id=goods.getInt("goods_id");
+			this.name=goods.getString("name");//商品名称
+			this.money=goods.getLong("money");
+			this.desc=goods.getString("desc");
+			}*/
+			if(i==0){
+				this.goods_id=goods.getInt("goods_id");
+				this.name=goods.getString("name");//商品名称
+				this.money=goods.getLong("money");
+				this.desc=goods.getString("desc");
+				
+				Picture picture =new Picture();
+				JSONArray array = goods.getJSONArray("pictures");//解封图片的object
+			    JSONObject json=array.getJSONObject(0);
+				picture.setUrl(json.getString("url"));
+		        this.pictures=picture; 	
+				
+				Merchant m=new Merchant();
+				JSONObject obj=goods.getJSONObject("merchant");
+				m.setName(obj.getString("name"));
+				m.setName(obj.getString("address"));
+				m.setName(obj.getString("tel"));
+				this.merchant=m;
+			}else if(i==1){
+				this.goods_id=goods.getInt("goods_id");
+				this.name=goods.getString("name");//商品名称
+				this.money=goods.getLong("money");
+				
+				Merchant m=new Merchant();
+				JSONObject obj=goods.getJSONObject("merchant");
+				m.setMerchant_id(obj.getInt("merchant_id"));
+				this.merchant=m;	
+				
+				Picture picture =new Picture();
+				JSONArray array = goods.getJSONArray("pictures");//解封图片的object
+			    JSONObject json=array.getJSONObject(0);
+				picture.setUrl(json.getString("url"));
+		        this.pictures=picture;
+			}
+			else if(i==2){ //merchant
+
+			Merchant m=new Merchant();
+			JSONObject obj=goods.getJSONObject("merchant");
+			m.setName(obj.getString("name"));
+			m.setAddress(obj.getString("address"));
+			m.setTel(obj.getString("tel"));
+			m.setLatitude(obj.getString("latitude"));
+			m.setLongtude(obj.getString("longtude"));
+			m.setMerchant_id(obj.getInt("merchant_id"));
+			
+			this.merchant=m;
+			}	
+			else if(i==3){ //
+				this.goods_id=goods.getInt("goods_id");
+				this.name=goods.getString("name");//商品名称
+				this.money=goods.getLong("money");
+				this.desc=goods.getString("desc");
+				
+				Picture picture =new Picture();
+				JSONArray array = goods.getJSONArray("pictures");//解封图片的object
+			    JSONObject json=array.getJSONObject(0);
+				picture.setUrl(json.getString("url"));
+		        this.pictures=picture; 	
+		        
+		        Merchant m=new Merchant();
+				JSONObject obj=goods.getJSONObject("merchant");
+				m.setName(obj.getString("name"));
+				m.setMerchant_id(obj.getInt("merchant_id"));
+				this.merchant=m;
+			}
+
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public int getGoods_id() {
+		return goods_id;
+	}
+	public void setGoods_id(int goods_id) {
+		this.goods_id = goods_id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public float getMoney() {
+		return money;
+	}
+	public void setMoney(float money) {
+		this.money = money;
+	}
+	public String getDesc() {
+		return desc;
+	}
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+	public int getState() {
+		return state;
+	}
+	public void setState(int state) {
+		this.state = state;
+	}
+	public Preferential getPreferential() {
+		return preferential;
+	}
+	public void setPreferential(Preferential preferential) {
+		this.preferential = preferential;
+	}
+	public Picture getPictures() {
+		return pictures;
+	}
+	public void setPictures(Picture pictures) {
+		this.pictures = pictures;
+	}
+	public String getRevise_time() {
+		return revise_time;
+	}
+	public void setRevise_time(String revise_time) {
+		this.revise_time = revise_time;
+	}
+	public Merchant getMerchant() {
+		return merchant;
+	}
+	public void setMerchant(Merchant merchant) {
+		this.merchant = merchant;
+	}
+	public int getTel_times() {
+		return tel_times;
+	}
+	public void setTel_times(int tel_times) {
+		this.tel_times = tel_times;
+	}
+	public int getGuide_times() {
+		return guide_times;
+	}
+	public void setGuide_times(int guide_times) {
+		this.guide_times = guide_times;
+	}
+	
+	
+	
+	
+}

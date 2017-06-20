@@ -1,0 +1,1077 @@
+package com.Bll;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+
+import com.Entity.AnnualInspection;
+import com.Entity.AnnualInspectionSet;
+import com.Entity.Car;
+import com.Entity.CarReport;
+import com.Entity.CarReportBrief;
+import com.Entity.CarReportBriefSet;
+import com.Entity.CarSet;
+import com.Entity.CustService;
+import com.Entity.DataFlow;
+import com.Entity.Fault;
+import com.Entity.Goods;
+import com.Entity.GoodsSet;
+import com.Entity.HomeEntity;
+import com.Entity.InsuranceRecord;
+import com.Entity.InsuranceRecordSet;
+import com.Entity.MaintainRecord;
+import com.Entity.MaintainRecordSet;
+import com.Entity.Merchant;
+import com.Entity.MerchantSet;
+import com.Entity.MyRedInfo;
+import com.Entity.Problem;
+import com.Entity.ProblemSet;
+import com.Entity.PurchaseFiles;
+import com.Entity.RedRecord;
+import com.Entity.RedRecordSet;
+import com.Entity.Remind;
+import com.Entity.RemindSet;
+import com.Entity.Setweather;
+import com.Entity.TourReportBrief;
+import com.Entity.TourReportBriefSet;
+import com.Entity.TourReportDetail;
+import com.Entity.UserEntity;
+import com.Entity.WeiZhang;
+import com.Entity.WeiZhangSet;
+import com.Entity.weather;
+import com.baidu.platform.comapi.map.M;
+import com.tool.JSONEntity;
+import com.tool.MyURL;
+import com.tool.SPUtils;
+
+public class CBLL {
+
+	private static CBLL cbll = new CBLL();
+
+	private CBLL() {
+	}
+
+	public static CBLL getInstance() {
+		return cbll;
+	}
+
+	/**
+	 * ----------------------用户登录-------------------------------------------
+	 */
+	public JSONEntity json2login(JSONObject json) {
+
+		JSONEntity entity = new JSONEntity();
+		try {
+			boolean flag = json.getBoolean("flag");
+			if (flag) {
+				entity.setFlag(flag);
+				JSONObject mUserJS = json.getJSONObject("result");
+				UserEntity userentity = new UserEntity(mUserJS, 0);
+				entity.setData(userentity);
+
+			} else {
+				entity.setFlag(flag);
+				entity.setMessage(json.getInt("msg"));
+
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return entity;
+	}
+
+	
+	/**
+	 * ----------------------修改用户信息-------------------------------------------
+	 */
+	public JSONEntity json2changeifon(JSONObject json) {
+
+		JSONEntity entity = new JSONEntity();
+		try {
+			boolean flag = json.getBoolean("flag");
+			if (flag) {
+				entity.setFlag(flag);
+
+
+			} else {
+				entity.setFlag(flag);
+				entity.setMessage(json.getInt("msg"));
+
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return entity;
+	}
+	/**
+	 * ----------------------用户注册-------------------------------------------
+	 */
+	public JSONEntity json2register(JSONObject json) {
+		JSONEntity entity = new JSONEntity();
+		try {
+			boolean flag = json.getBoolean("flag");
+			if (json.has("msg")) {
+				entity.setMessage(json.getInt("msg"));
+			}
+			entity.setFlag(flag);
+
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return entity;
+	}
+
+	/**
+	 * ----------------------首页数据-------------------------------------------
+	 */
+	public JSONEntity json2home(JSONObject json) {
+		// TODO Auto-generated method stub
+		JSONEntity entity = new JSONEntity();
+
+		try {
+			boolean flag = json.getBoolean("flag");
+			if (flag) {
+				entity.setFlag(flag);
+				HomeEntity homeentity = new HomeEntity(json);
+				entity.setData(homeentity);
+			} else {
+				entity.setFlag(flag);
+				entity.setMessage(json.getInt("msg"));
+
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return entity;
+	}
+
+	/**
+	 * ----------------------获取拥有车列表请求------------------------------------------
+	 * -
+	 */
+	public JSONEntity json2carlist(JSONObject json) {
+		// TODO Auto-generated method stub
+		JSONEntity entity = new JSONEntity();
+
+		try {
+			boolean flag = json.getBoolean("flag");
+			if (flag) {
+				entity.setFlag(flag);
+				JSONArray array = json.getJSONArray("cars");
+				List<Car> carlist = new ArrayList<Car>();
+				for (int i = 0; i < array.length(); i++) {
+					Car car = new Car((JSONObject) array.get(i), 0);
+					carlist.add(car);
+				}
+				CarSet carset = new CarSet(carlist);
+				entity.setData(carset);
+			} else {
+				entity.setFlag(flag);
+				entity.setMessage(json.getInt("msg"));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return entity;
+	}
+
+	/**
+	 * --------------------------获取天气活动页面有关数据-----------------------
+	 */
+	public JSONEntity json2weather(JSONObject json) {
+		// TODO Auto-generated method stub
+		JSONEntity entity = new JSONEntity();
+		try {
+			boolean flag = json.getBoolean("flag");
+			if (flag) {
+				entity.setFlag(flag);
+				JSONObject arrayy = json.getJSONObject("result");
+				JSONArray array = arrayy.getJSONArray("weathers");
+				List<weather> weatherlist = new ArrayList<weather>();
+				for (int i = 0; i < array.length(); i++) {
+					weather weath = new weather((JSONObject) array.get(i));
+					weatherlist.add(weath);
+				}
+				Setweather setweather = new Setweather(weatherlist);
+				entity.setData(setweather);
+			} else {
+				entity.setFlag(flag);
+				entity.setMessage(json.getInt("msg"));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return entity;
+	}
+
+	/**
+	 * ----------------------获取我的界面数据-------------------------------------------
+	 */
+	public JSONEntity json2my(JSONObject json) {
+		// TODO Auto-generated method stub
+		JSONEntity entity = new JSONEntity();
+		try {
+			boolean flag = json.getBoolean("flag");
+			if (flag) {
+				entity.setFlag(flag);
+				JSONObject carjs = json.getJSONObject("result");
+				Car car = new Car(carjs, 1);
+				entity.setData(car);
+			} else {
+				entity.setFlag(flag);
+				entity.setMessage(json.getInt("msg"));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return entity;
+	}
+
+	/**
+	 * ----------------------获取首页商品推荐列表----------------------------------------
+	 * ---
+	 */
+	public JSONEntity json2homegoods(JSONObject json) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * @author M----------------获取商家的全部信息---------------------------
+	 */
+	public JSONEntity json2merchant(JSONObject json) {
+		JSONEntity entity = new JSONEntity();
+		try {
+			boolean flag = json.getBoolean("flag");
+			if (flag) {
+				entity.setFlag(flag);
+				JSONArray array = json.getJSONArray("merchans");
+				List<Merchant> merchantlist = new ArrayList<Merchant>();
+				for (int i = 0; i < array.length(); i++) {
+					Merchant merchant = new Merchant((JSONObject) array.get(i),
+							1);
+					merchantlist.add(merchant);
+				}
+				MerchantSet merchantSet = new MerchantSet(merchantlist);
+				entity.setData1(json.getJSONObject("page").getInt("totalPage"));// 添加数据的总页数
+				entity.setData(merchantSet);
+			} else {
+				entity.setFlag(flag);
+				entity.setMessage(json.getInt("msg"));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return entity;
+	}
+
+	/**
+	 * ----------------------获取我的信息-------------------------------------------
+	 */
+	public JSONEntity json2myinfo(JSONObject json) {
+		// TODO Auto-generated method stub
+		JSONEntity entity = new JSONEntity();
+		try {
+			boolean flag = json.getBoolean("flag");
+			if (flag) {
+				entity.setFlag(flag);
+				JSONObject userjs = json.getJSONObject("user");
+				UserEntity user = new UserEntity(userjs, 1);
+				entity.setData(user);
+			} else {
+				entity.setFlag(flag);
+				entity.setMessage(json.getInt("msg"));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return entity;
+	}
+
+	/**
+	 * ----------------------获取车辆检测报告-------------------------------------------
+	 */
+	public JSONEntity json2carreport(JSONObject json) {
+		// TODO Auto-generated method stub
+		JSONEntity entity = new JSONEntity();
+		try {
+			boolean flag = json.getBoolean("flag");
+			if (flag) {
+				entity.setFlag(flag);
+				JSONObject report = json.getJSONObject("result");
+				CarReport catreport = new CarReport(report);
+				entity.setData(catreport);
+
+			} else {
+				entity.setFlag(flag);
+				entity.setMessage(json.getInt("msg"));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return entity;
+	}
+
+	/**
+	 * ----------------获取商品的全部信息---------------------------
+	 */
+	public JSONEntity json2goods(JSONObject json) {
+
+		JSONEntity entity = new JSONEntity();
+		try {
+			boolean flag = json.getBoolean("flag");
+			if (flag) {
+				entity.setFlag(flag);
+				JSONArray array = json.getJSONArray("goods");
+				List<Goods> goodslist = new ArrayList<Goods>();
+				for (int i = 0; i < array.length(); i++) {
+					Goods goods = new Goods((JSONObject) array.get(i));
+					goodslist.add(goods);
+				}
+				GoodsSet goodsSet = new GoodsSet(goodslist);
+				entity.setData1(json.getJSONObject("page").getInt("totalPage"));
+				entity.setData(goodsSet);
+			} else {
+				entity.setFlag(flag);
+				entity.setMessage(json.getInt("msg"));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return entity;
+	}
+
+	/**
+	 * ----------------获取历史车况检测报告list---------------------------
+	 */
+	public JSONEntity json2historycarreportlist(JSONObject json) {
+		// TODO Auto-generated method stub
+		JSONEntity entity = new JSONEntity();
+		try {
+			boolean flag = json.getBoolean("flag");
+			if (flag) {
+				entity.setFlag(flag);
+				JSONArray array = json.getJSONArray("result");
+
+				List<CarReportBrief> list = new ArrayList<CarReportBrief>();
+				for (int i = 0; i < array.length(); i++) {
+					CarReportBrief brief = new CarReportBrief(
+							(JSONObject) array.get(i));
+					list.add(brief);
+				}
+				CarReportBriefSet Set = new CarReportBriefSet(list);
+				entity.setData(Set);
+				entity.setData1(json.getJSONObject("page").getInt("totalPage"));// 添加数据的总页数
+			} else {
+				entity.setFlag(flag);
+				entity.setMessage(json.getInt("msg"));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return entity;
+	}
+
+	/**
+	 * ----------------获取故障码解释---------------------------
+	 */
+	public JSONEntity json2faultdetail(JSONObject json) {
+		// TODO Auto-generated method stub
+		JSONEntity entity = new JSONEntity();
+		try {
+			boolean flag = json.getBoolean("flag");
+			if (flag) {
+				entity.setFlag(flag);
+				JSONObject obj = json.getJSONObject("result");
+				Fault fault = new Fault(obj, 1);
+				entity.setData(fault);
+			} else {
+				entity.setFlag(flag);
+				entity.setMessage(json.getInt("msg"));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return entity;
+	}
+
+	/**
+	 * ----------------------获取商家详情信息-------------------------------------------
+	 */
+	public JSONEntity json2merchantdetail(JSONObject json) {
+		// TODO Auto-generated method stub
+		JSONEntity entity = new JSONEntity();
+		try {
+			boolean flag = json.getBoolean("flag");
+			if (flag) {
+				entity.setFlag(flag);
+				JSONObject merchandetail = json.getJSONObject("merchan");
+				Merchant merchan = new Merchant(merchandetail, 1);
+				entity.setData(merchan);
+			} else {
+				entity.setFlag(flag);
+				entity.setMessage(json.getInt("msg"));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return entity;
+	}
+/** 
+ * ------------------获取商品的详情-----------------
+ */
+	public JSONEntity json2goodsdetail(JSONObject json){
+		JSONEntity entity =new JSONEntity();
+		try {
+			boolean flag =json.getBoolean("flag");
+			if(flag){
+				entity.setFlag(flag);
+				JSONObject goodsdetail=json.getJSONObject("merchan");
+				Goods goods =new Goods(goodsdetail);
+				entity.setData(goods);
+			}
+			else {
+				entity.setFlag(flag);
+				entity.setMessage(json.getInt("msg"));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return entity;
+	}
+	/**
+	 * ----------------获取数据流解释---------------------------
+	 */
+	public JSONEntity json2dataflowdetail(JSONObject json) {
+		// TODO Auto-generated method stub
+		JSONEntity entity = new JSONEntity();
+		try {
+			boolean flag = json.getBoolean("flag");
+			if (flag) {
+				entity.setFlag(flag);
+				JSONObject obj = json.getJSONObject("result");
+				DataFlow dataflow = new DataFlow(obj, 1);
+				entity.setData(dataflow);
+			} else {
+				entity.setFlag(flag);
+				entity.setMessage(json.getInt("msg"));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return entity;
+	}
+
+	/**
+	 * ----------------获取咨询列表---------------------------
+	 */
+	public JSONEntity json2consultlist(JSONObject json) {
+		// TODO Auto-generated method stub
+		JSONEntity entity = new JSONEntity();
+		boolean flag;
+		try {
+			flag = json.getBoolean("flag");
+			if (flag) {
+				entity.setFlag(flag);
+				JSONArray array=json.getJSONArray("problem");
+				List<Problem>list=new ArrayList<Problem>();
+				for (int i = 0; i < array.length(); i++) {
+					list.add(new Problem(array.getJSONObject(i),0));
+				}
+				JSONObject obj=json.getJSONObject("cs");
+				CustService service=new CustService(obj);
+				
+				ProblemSet set=new ProblemSet(list);
+				entity.setData(set);
+				entity.setData1(service);	
+			}else {
+				entity.setFlag(flag);
+				entity.setMessage(json.getInt("msg"));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return entity;
+	}
+
+	/**
+	 * ----------------获取咨询问题详情---------------------------
+	 */
+	public JSONEntity json2consultdetail(JSONObject json) {
+		// TODO Auto-generated method stub
+		JSONEntity entity = new JSONEntity();
+		try {
+			boolean flag = json.getBoolean("flag");
+			if(flag){
+				entity.setFlag(flag);
+				JSONObject obj=json.getJSONObject("result");
+				Problem problem=new Problem(obj, 0);
+				entity.setData(problem);
+			}else {
+				entity.setFlag(flag);
+				entity.setMessage(json.getInt("msg"));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return entity;
+	}
+
+	/**
+	 * ----------------获取提醒列表---------------------------
+	 */
+	@SuppressLint("NewApi") 
+	public JSONEntity json2remindlist(JSONObject json,Context context,int level) {
+		// TODO Auto-generated method stub
+		JSONEntity entity = new JSONEntity();
+		try {
+			boolean flag = json.getBoolean("flag");
+			if(flag){
+				entity.setFlag(flag);
+				JSONArray array=json.getJSONArray("result");
+				String string=(String) SPUtils.get(context, "remindlist"+level, "[]");
+				JSONArray oldarray=new JSONArray(string);
+				for (int i = 0; i < oldarray.length(); i++) {
+					JSONObject obj=(JSONObject) oldarray.get(i);
+					obj.put("read", 1);//将老数据都设为已读
+					array.put(obj);
+				}
+				List<Remind>list=new ArrayList<Remind>();
+				for (int i = 0; i < array.length(); i++) {
+					list.add(new Remind(array.getJSONObject(i),0));
+				}
+				RemindSet set=new RemindSet(list);
+				if(array.length()>100){
+					for (int j = 101; j < array.length(); j++) {
+						array.remove(j);
+					}
+				}
+				SPUtils.put(context, "remindlist"+level, array);//缓存所有消息
+				entity.setData(set);
+			}else {
+				entity.setFlag(flag);
+				entity.setMessage(json.getInt("msg"));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return entity;
+	}
+
+	/**
+	 * ----------------获取提醒三个数量---------------------------
+	 */
+	public JSONEntity json2remindnum(JSONObject json) {
+		// TODO Auto-generated method stub
+		JSONEntity entity = new JSONEntity();
+		try {
+			boolean flag = json.getBoolean("flag");
+			if(flag){
+				entity.setFlag(flag);
+				JSONArray array=json.getJSONArray("result");
+				List<Remind>list=new ArrayList<Remind>();
+				for (int i = 0; i < array.length(); i++) {
+					list.add(new Remind(array.getJSONObject(i),1));
+				}
+				entity.setData(list);
+			}else {
+				entity.setFlag(flag);
+				entity.setMessage(json.getInt("msg"));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return entity;
+	}
+
+	
+/**
+ * -------------------------修改密码---------------------
+ */
+	public JSONEntity json2changpassword(JSONObject json){
+		JSONEntity entity =new JSONEntity();
+		boolean flag;
+		try {
+			flag = json.getBoolean("flag");
+			if(flag){
+				entity.setFlag(flag);
+			}
+			else{
+				entity.setFlag(flag);
+				entity.setMessage(json.getInt("msg"));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return entity;		
+	}
+
+	/**
+	 * -------------------------获取行程报告列表---------------------
+	 */
+	public JSONEntity json2tourreport(JSONObject json) {
+	// TODO Auto-generated method stub
+		JSONEntity entity =new JSONEntity();
+		try {
+			boolean flag= json.getBoolean("flag");
+			if(flag){
+				entity.setFlag(flag);
+				JSONArray array=json.getJSONArray("result");
+				List<TourReportBrief>list=new ArrayList<TourReportBrief>();
+				for (int i = 0; i < array.length(); i++) {
+					list.add(new TourReportBrief(array.getJSONObject(i)));
+				}
+				TourReportBriefSet set=new TourReportBriefSet(list);
+				entity.setData(set);
+			}else{
+				entity.setFlag(flag);
+				entity.setMessage(json.getInt("msg"));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	return entity;
+	}
+
+	/**
+	 * -------------------------获取行程报告详情---------------------
+	 */
+	public JSONEntity json2tourreportdetail(JSONObject json) {
+		// TODO Auto-generated method stub
+		JSONEntity entity =new JSONEntity();
+		try {
+			boolean flag= json.getBoolean("flag");
+			if(flag){
+				entity.setFlag(flag);
+				TourReportDetail detail=new TourReportDetail(json.getJSONObject("result"));
+				entity.setData(detail);
+			}else{
+				entity.setFlag(flag);
+				entity.setMessage(json.getInt("msg"));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return entity;
+	}
+
+	/**
+	 * -------------------------获取红包余额，已使用，已获取---------------------
+	 */
+	public JSONEntity json2myredinfo(JSONObject json) {
+		// TODO Auto-generated method stub
+		JSONEntity entity =new JSONEntity();
+		try {
+			boolean flag= json.getBoolean("flag");
+			if(flag){
+				entity.setFlag(flag);
+				MyRedInfo info=new MyRedInfo(json.getJSONObject("result"));
+				entity.setData(info);
+			}else{
+				entity.setFlag(flag);
+				entity.setMessage(json.getInt("msg"));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return entity;
+	}
+
+	/**
+	 * -------------------------获取红包记录列表---------------------
+	 */
+	public JSONEntity json2myredlist(JSONObject json) {
+		// TODO Auto-generated method stub
+		JSONEntity entity =new JSONEntity();
+		try {
+			boolean flag= json.getBoolean("flag");
+			if(flag){
+				entity.setFlag(flag);
+				JSONArray array=json.getJSONArray("result");
+				List<RedRecord> list=new ArrayList<RedRecord>();
+				for (int i = 0; i < array.length(); i++) {
+					list.add(new RedRecord(array.getJSONObject(i)));
+				}
+				RedRecordSet set=new RedRecordSet(list);
+				entity.setData(set);
+				entity.setData1(json.getJSONObject("page").getInt("totalPage"));// 添加数据的总页数
+			}else{
+				entity.setFlag(flag);
+				entity.setMessage(json.getInt("msg"));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return entity;
+	}
+
+	
+	/**
+	 * -------------------------获取保险信息列表---------------------
+	 */
+		public JSONEntity json2Insurancedate(JSONObject json){
+			JSONEntity entity =new JSONEntity();
+			boolean flag;
+			try {
+				flag = json.getBoolean("flag");
+				if(flag){
+					entity.setFlag(flag);
+					JSONArray array=json.getJSONArray("insurance");
+					List<InsuranceRecord>list=new ArrayList<InsuranceRecord>();
+					for (int i = 0; i < array.length(); i++) {
+						list.add(new InsuranceRecord(array.getJSONObject(i),0));
+					}
+				
+					InsuranceRecordSet insuranceRecordSet = new InsuranceRecordSet(list);
+					entity.setData(insuranceRecordSet);	
+				}
+				else{
+					entity.setFlag(flag);
+					entity.setMessage(json.getInt("msg"));
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return entity;		
+		}
+		
+/*
+ * ---------------------------添加保险信息--------------------------		
+ */
+		public JSONEntity json2addinsurance(JSONObject json){
+			JSONEntity entity =new JSONEntity();
+			boolean flag;
+			try {
+				flag = json.getBoolean("flag");
+				if(flag){
+					entity.setFlag(flag);
+				}
+				else{
+					entity.setFlag(flag);
+					entity.setMessage(json.getInt("msg"));
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return entity;		
+		}
+		
+ 
+/*
+ * --------------------------获取保养记录列表------------
+ */
+public JSONEntity json2Maintenancedate(JSONObject json){
+	JSONEntity entity =new JSONEntity();
+	boolean flag;
+	try {
+		flag = json.getBoolean("flag");
+		if(flag){
+			entity.setFlag(flag);
+			JSONArray array=json.getJSONArray("records");
+			List<MaintainRecord>list=new ArrayList<MaintainRecord>();
+			for (int i = 0; i < array.length(); i++) {
+				list.add(new MaintainRecord(array.getJSONObject(i),1));
+			}
+		
+			MaintainRecordSet maintainRecordSet = new MaintainRecordSet(list);
+			entity.setData(maintainRecordSet);	
+		}
+		else{
+			entity.setFlag(flag);
+			entity.setMessage(json.getInt("msg"));
+		}
+	} catch (JSONException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return entity;		
+}
+
+/**
+ * -------------------------获取全部违章信息
+ */
+public JSONEntity json2Peccancy(JSONObject json){
+	JSONEntity entity =new JSONEntity();
+	boolean flag;
+	try {
+		flag = json.getBoolean("flag");
+		if(flag){
+			entity.setFlag(flag);
+			JSONArray array=json.getJSONArray("result");
+			List<WeiZhang>list=new ArrayList<WeiZhang>();
+			for (int i = 0; i < array.length(); i++) {
+				list.add(new WeiZhang(array.getJSONObject(i)));
+			}
+		
+			WeiZhangSet weizhanglist = new WeiZhangSet(list);
+			entity.setData(weizhanglist);	
+		}
+		else{
+			entity.setFlag(flag);
+			entity.setMessage(json.getInt("msg"));
+		}
+	} catch (JSONException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return entity;		
+}
+
+/** 
+ * ------------------获取购买档案-----------------
+ */
+	public JSONEntity json2getpurchaserecord(JSONObject json){
+		JSONEntity entity =new JSONEntity();
+		try {
+			boolean flag =json.getBoolean("flag");
+			if(flag){
+				entity.setFlag(flag);
+				JSONObject purchaserecord=json.getJSONObject("buy");
+				PurchaseFiles purchse =new PurchaseFiles(purchaserecord);
+				entity.setData(purchse);
+			}
+			else {
+				entity.setFlag(flag);
+				entity.setMessage(json.getInt("msg"));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return entity;
+	}
+	
+	/**
+	 * ----------------------获取我的页面切换车列表请求------------------------------------------
+	 * -
+	 */
+	public JSONEntity json2carlistmy(JSONObject json) {
+		// TODO Auto-generated method stub
+		JSONEntity entity = new JSONEntity();
+
+		try {
+			boolean flag = json.getBoolean("flag");
+			if (flag) {
+				entity.setFlag(flag);
+				JSONArray array = json.getJSONArray("cars");
+				List<Car> carlist = new ArrayList<Car>();
+				for (int i = 0; i < array.length(); i++) {
+					Car car = new Car((JSONObject) array.get(i), 1);
+					carlist.add(car);
+				}
+				CarSet carset = new CarSet(carlist);
+				entity.setData(carset);
+			} else {
+				entity.setFlag(flag);
+				entity.setMessage(json.getInt("msg"));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return entity;
+	}
+	
+	/** 
+	 * ------------------获取车辆设置首页的数据-----------------
+	 */
+		public JSONEntity json2carsetting(JSONObject json){
+			JSONEntity entity =new JSONEntity();
+			try {
+				boolean flag =json.getBoolean("flag");
+				if(flag){
+					entity.setFlag(flag);
+					JSONObject carsetting=json.getJSONObject("result");
+					Car car =new Car(carsetting,2);
+					entity.setData(car);
+				}
+				else {
+					entity.setFlag(flag);
+					entity.setMessage(json.getInt("msg"));
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return entity;
+		}	
+		
+		/**
+		 * ----------------------获取全部的车品牌------------------------------------------
+		 * -
+		 */
+		public JSONEntity json2getallcar(JSONObject json) {
+			// TODO Auto-generated method stub
+			JSONEntity entity = new JSONEntity();
+			try {
+				boolean flag = json.getBoolean("flag");
+				if (flag) {
+					entity.setFlag(flag);
+					JSONArray array = json.getJSONArray("brands");
+					List<Car> carlist = new ArrayList<Car>();
+					for (int i = 0; i < array.length(); i++) {
+						Car car = new Car((JSONObject) array.get(i), 3);
+						carlist.add(car);
+					}
+					//CarSet carset = new CarSet(carlist);
+					entity.setData(carlist);
+				} else {
+					entity.setFlag(flag);
+					entity.setMessage(json.getInt("msg"));
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return entity;
+		}
+		/**
+		 * ----------------------获取全部的车型------------------------------------------
+		 * -
+		 */
+		public JSONEntity json2getallbrands(JSONObject json) {
+			// TODO Auto-generated method stub
+			JSONEntity entity = new JSONEntity();
+			try {
+				boolean flag = json.getBoolean("flag");
+				if (flag) {
+					entity.setFlag(flag);
+					JSONArray array = json.getJSONArray("brands");
+					List<Car> carlist = new ArrayList<Car>();
+					for (int i = 0; i < array.length(); i++) {
+						Car car = new Car((JSONObject) array.get(i), 4);
+						carlist.add(car);
+					}
+					CarSet carset = new CarSet(carlist);
+					entity.setData(carset);
+				} else {
+					entity.setFlag(flag);
+					entity.setMessage(json.getInt("msg"));
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return entity;
+		}
+		
+		
+		/**
+		 * ----------------------获取添加车界面------------------------------------------
+		 * -
+		 */
+		public JSONEntity json2addcar(JSONObject json) {
+			// TODO Auto-generated method stub
+			JSONEntity entity = new JSONEntity();
+
+			try {
+				boolean flag = json.getBoolean("flag");
+				if (flag) {
+					entity.setFlag(flag);
+					JSONObject obj = json.getJSONObject("car");
+					Car car =new Car(obj,2);
+					entity.setData(car);
+				
+				} else {
+					entity.setFlag(flag);
+					entity.setMessage(json.getInt("msg"));
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return entity;
+		}
+		
+		/**
+		 * ----------------------获取汽车设置界面信息-------------------------------------------
+		 */
+		public JSONEntity json2caisetting(JSONObject json) {
+			// TODO Auto-generated method stub
+			JSONEntity entity = new JSONEntity();
+			try {
+				boolean flag = json.getBoolean("flag");
+				if (flag) {
+					entity.setFlag(flag);
+					JSONObject carjs = json.getJSONObject("result");
+					Car car = new Car(carjs, 5);
+					entity.setData(car);
+				} else {
+					entity.setFlag(flag);
+					entity.setMessage(json.getInt("msg"));
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return entity;
+		}
+		
+		/**
+		 * -------------------------获取年检记录列表---------------------
+		 */
+			public JSONEntity json2yearinspection(JSONObject json){
+				JSONEntity entity =new JSONEntity();
+				boolean flag;
+				try {
+					flag = json.getBoolean("flag");
+					if(flag){
+						entity.setFlag(flag);
+						JSONArray array=json.getJSONArray("result");
+						List<AnnualInspection>list=new ArrayList<AnnualInspection>();
+						for (int i = 0; i < array.length(); i++) {
+							list.add(new AnnualInspection(array.getJSONObject(i)));
+						}
+					
+						AnnualInspectionSet annualInspectionSet = new AnnualInspectionSet(list);
+						entity.setData(annualInspectionSet);	
+					}
+					else{
+						entity.setFlag(flag);
+						entity.setMessage(json.getInt("msg"));
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return entity;		
+			}
+}
+
+

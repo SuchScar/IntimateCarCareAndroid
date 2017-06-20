@@ -1,0 +1,104 @@
+package com.Adapter;
+
+import com.Activity.ChangeInsuranceInformation;
+import com.Activity.ChangeMaintenance;
+import com.Activity.R;
+import com.Adapter.ActivityinsurancedateAdapter.ViewHolder;
+import com.Entity.MaintainRecordSet;
+import com.tool.SPUtils;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.LayerDrawable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class ActivitymaintenancedateAdapter extends BaseAdapter{
+
+   private Context context;
+   private MaintainRecordSet list;
+   
+   public ActivitymaintenancedateAdapter(Context c,MaintainRecordSet l){
+	  this.context=c;
+	  this.list=l;
+   }
+    
+   class ViewHolder{
+	   TextView  cycle;//保养里程
+	   TextView tv_priject;//保养项目
+	   TextView money;//保养费用
+	   TextView remark_c;//备注
+	   TextView cre_time;//创建日期
+	   ImageView xiugai;
+   }
+	@Override
+	public int getCount() {
+		// TODO Auto-generated method stub
+		return list.getSize();
+	}
+
+	@Override
+	public Object getItem(int arg0) {
+		// TODO Auto-generated method stub
+		return list.getItem(arg0);
+	}
+
+	@Override
+	public long getItemId(int arg0) {
+		// TODO Auto-generated method stub
+		return arg0;
+	}
+
+	@Override
+	public View getView(final int arg0, View arg1, ViewGroup arg2) {
+		// TODO Auto-generated method stub
+		ViewHolder viewholder;
+  		if(arg1==null){
+			arg1=LayoutInflater.from(context).inflate(R.layout.item_activitymaintenancedate, null);
+			viewholder = new ViewHolder();
+			viewholder.cycle=(TextView)arg1.findViewById(R.id.tv_servicecycle);
+			viewholder.tv_priject=(TextView)arg1.findViewById(R.id.tv_priject);
+			viewholder.money=(TextView)arg1.findViewById(R.id.tv_feiyong);
+			viewholder.remark_c=(TextView)arg1.findViewById(R.id.tv_beizhu);
+			viewholder.cre_time=(TextView)arg1.findViewById(R.id.tv_data);
+			viewholder.xiugai=(ImageView)arg1.findViewById(R.id.xiugai);
+			arg1.setTag(viewholder);
+		}
+  		else{
+			viewholder = (ViewHolder) arg1.getTag();
+		}	
+  		
+  		viewholder.cre_time.setText(list.getItem(arg0).getTime());
+  		viewholder.cycle.setText(list.getItem(arg0).getCycle()+"");
+  		viewholder.tv_priject.setText(list.getItem(arg0).getItem_desc());
+  		viewholder.money.setText(list.getItem(arg0).getMoney()+"");
+  		viewholder.remark_c.setText(list.getItem(arg0).getRemark_c());
+	
+  		((ImageView)arg1.findViewById(R.id.xiugai)).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent=new Intent(context,ChangeMaintenance.class);	
+				System.out.println("1111111111111111f"+list.getItem(arg0).getMrecord_id());
+		        SPUtils.put(context, "mrecord", list.getItem(arg0).getMrecord_id());
+		        System.out.println("1111111111111111f"+list.getItem(arg0).getMrecord_id());
+		        
+		        
+		        ((Activity) context).startActivityForResult(intent, 2);
+			}
+		});
+	
+  		return arg1;
+	}
+	
+	
+	
+}

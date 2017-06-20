@@ -1,0 +1,38 @@
+package com.Activity;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.view.View.OnClickListener;
+import android.widget.RelativeLayout;
+
+public class AboutSoftSetting extends Activity{
+ private RelativeLayout rel_gongneng;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.activity_softsetting);
+		findview();
+		setlisten();
+	}
+	private void findview() {
+		// TODO Auto-generated method stub
+		rel_gongneng=(RelativeLayout) findViewById(R.id.rel_gongneng);
+	}
+	private void setlisten() {
+		// TODO Auto-generated method stub
+		rel_gongneng.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+			Intent intent=new Intent(AboutSoftSetting.this,FunctionIntroduction.class);
+			startActivity(intent);
+			}
+		});
+	}
+}

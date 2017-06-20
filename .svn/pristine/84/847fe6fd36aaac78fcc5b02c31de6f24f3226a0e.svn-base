@@ -1,0 +1,174 @@
+package com.Activity;
+
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.concurrent.Executor;
+
+import org.json.JSONObject;
+
+import com.Bll.CBLL;
+import com.Entity.PurchaseFiles;
+import com.Entity.UserEntity;
+import com.Http.HttpCallback;
+import com.Http.HttpTask;
+import com.tool.JSONEntity;
+import com.tool.MyURL;
+import com.tool.ToastUtil;
+
+import android.R.integer;
+import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.text.format.DateFormat;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+public class PurchaseRecordActivity extends Activity{
+
+	private RelativeLayout rel_buydate;
+	private TextView tv_date;
+	private ImageView img_purchaserecord_back,img_commit;
+	private EditText edt_jine,edt_buyby,edt_buybycall;
+	private String date,work_unit,unit_tel;
+	private String money;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.activity_purchaserecord);       
+        initView();
+        setListen();
+  	    ReastDate();
+	}
+
+	@SuppressWarnings("unchecked")
+	private void ReastDate() {
+		// TODO Auto-generated method stub
+		HashMap<String, String>update=new UserEntity().getIdTaken(PurchaseRecordActivity.this);
+		new HttpTask(getpurchasecallback, MyURL.BUYRECORD).execute(update);
+	}
+    HttpCallback getpurchasecallback=new HttpCallback() {
+		
+		@Override
+		public void getResult(JSONObject json) {
+			// TODO Auto-generated method stub
+	 CBLL cbll=CBLL.getInstance();
+	 JSONEntity entity=cbll.json2getpurchaserecord(json);
+	 if(entity.isFlag()){
+		 System.out.println("BBBBBBBBBBB");
+	PurchaseFiles purchasefiles=(PurchaseFiles) entity.getData();
+	System.out.println("CCCCCCCCCC"+purchasefiles.getUnit_tel());
+	if(!purchasefiles.getUnit_tel().equals("")){
+	edt_buybycall.setText(purchasefiles.getUnit_tel());
+	}
+	if(purchasefiles.getMoney()!=-1){
+		 edt_jine.setText(purchasefiles.getMoney()+"");
+	}
+ 	   if(!purchasefiles.getWork_unit().equals("")){
+ 		  edt_buyby.setText(purchasefiles.getWork_unit());
+ 	   }
+    	if(!purchasefiles.getDate().equals("")){
+    		tv_date.setText(purchasefiles.getDate());
+    	}
+    
+/*if(purchasefiles.getUnit_tel().equals("")&&
+   mone.equals("")&&purchasefiles.getWork_unit().equals("")
+   &&purchasefiles.getDate().equals("")){
+	ToastUtil.show(PurchaseRecordActivity.this, "购买档案为空！");
+}*/
+	 }
+		}
+	};
+	private void setListen() {
+		// TODO Auto-generated method stub
+		rel_buydate.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+
+				// TODO Auto-generated method stub
+				final Calendar cal = Calendar.getInstance();  
+		        final DatePickerDialog mDialog = new DatePickerDialog(PurchaseRecordActivity.this, null,  
+		                cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));  
+		  
+		        //手动设置按钮  
+		        mDialog.setButton(DialogInterface.BUTTON_POSITIVE, "完成", new DialogInterface.OnClickListener() {  
+		            @Override  
+		            public void onClick(DialogInterface dialog, int which) {  
+		                //通过mDialog.getDatePicker()获得dialog上的DatePicker组件，然后可以获取日期信息  
+		                DatePicker datePicker = mDialog.getDatePicker();  
+		                cal.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
+		                tv_date.setText(DateFormat.format("yyy-MM-dd", cal));
+		            }  
+		        });  
+		        //取消按钮，如果不需要直接不设置即可  
+		        mDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "取消", new DialogInterface.OnClickListener() {  
+		            @Override  
+		            public void onClick(DialogInterface dialog, int which) {  
+		                System.out.println("BUTTON_NEGATIVE~~");  
+		            }  
+		        });  
+		        mDialog.show();
+			
+			}
+		});
+		img_purchaserecord_back.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+			
+			finish();	
+			}
+		});
+		img_commit.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				money=edt_jine.getText().toString();			
+				date=tv_date.getText().toString();
+				work_unit=edt_buyby.getText().toString();
+				unit_tel=edt_buybycall.getText().toString();
+			HashMap<String, String>update=new PurchaseFiles().changepurchase(PurchaseRecordActivity.this,Integer.parseInt(money),date,work_unit,unit_tel);
+			new HttpTask(purchasecallback, MyURL.CHANGERECORD).execute(update);
+			}
+		});
+	}
+  HttpCallback purchasecallback=new HttpCallback() {
+	
+	@Override
+	public void getResult(JSONObject json) {
+		// TODO Auto-generated method stub
+		CBLL cbll=CBLL.getInstance();
+		JSONEntity entity=cbll.json2changpassword(json);
+		if(entity.isFlag()){
+			ToastUtil.show(PurchaseRecordActivity.this, "更新成功");
+			finish();
+		}
+		else{
+			ToastUtil.show(PurchaseRecordActivity.this, "更新失败");
+		}
+	}
+};
+	private void initView() {
+		// TODO Auto-generated method stub
+		img_commit=(ImageView)findViewById(R.id.img_commit);
+		edt_buybycall=(EditText)findViewById(R.id.edt_buybycall);
+		edt_buyby=(EditText)findViewById(R.id.edt_buyby);
+		edt_jine=(EditText)findViewById(R.id.edt_jine);
+		img_purchaserecord_back=(ImageView)findViewById(R.id.img_purchaserecord_back);
+		rel_buydate=(RelativeLayout)findViewById(R.id.rel_buydate);
+		tv_date=(TextView)findViewById(R.id.tv_date);
+	}
+}

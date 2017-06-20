@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:id="@+id/Rel1"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/orangelight" >
+
+        <LinearLayout
+            android:id="@+id/lin_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/travel_report"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/View1"
+        android:layout_below="@+id/Rel1" 
+        android:scrollbars="none">
+
+    </ListView>
+
+    <View 
+        android:id="@+id/View1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/Lin1"
+        android:background="@color/linegray"/>
+    <LinearLayout
+        android:id="@+id/Lin1"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:id="@+id/rel_yesterday"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/direction" />
+
+        </RelativeLayout>
+
+        <View 
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/linegray"/>
+        <RelativeLayout
+            android:id="@+id/rel_changedate"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3" >
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="2016-10-10" 
+                android:textSize="17sp"/>
+
+        </RelativeLayout>
+
+         <View 
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/linegray"/>
+        <RelativeLayout
+            android:id="@+id/rel_tomorrow"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:rotation="180"
+                android:src="@drawable/direction" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

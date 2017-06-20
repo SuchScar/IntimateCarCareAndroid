@@ -1,0 +1,78 @@
+package com.Adapter;
+
+import org.xutils.x;
+
+import com.Activity.R;
+import com.Adapter.ActivityCommodityNewsadapter.ViewHolder;
+import com.Entity.CarSet;
+import com.tool.MyURL;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class Activitymysettingadapter extends BaseAdapter{
+   
+	private Context context;
+	private CarSet list;
+	
+	public Activitymysettingadapter(Context c,CarSet l){
+		this.context=c;
+		this.list=l;
+	}
+	
+	class ViewHolder{
+		TextView  car_number;
+		ImageView  car_image;
+	} 
+	
+	@Override
+	public int getCount() {
+		// TODO Auto-generated method stub
+		return list.getSize();
+	}
+
+	@Override
+	public Object getItem(int position) {
+		// TODO Auto-generated method stub
+		return list.getItem(position);
+	}
+
+	@Override
+	public long getItemId(int position) {
+		// TODO Auto-generated method stub
+		return position;
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		// TODO Auto-generated method stub
+		ViewHolder viewholder;
+		if(convertView==null){
+			convertView=LayoutInflater.from(context).inflate(R.layout.item_activitymysettingadapter, null);
+			viewholder=new ViewHolder();
+			viewholder.car_image=(ImageView)convertView.findViewById(R.id.img_carimage);
+			viewholder.car_number=(TextView)convertView.findViewById(R.id.tv_carnum);
+			convertView.setTag(viewholder);
+		}
+		
+		else{
+			viewholder = (ViewHolder) convertView.getTag();
+		}
+		if(list.getItem(position).getBrand_logo().equals("null")){
+			viewholder.car_image.setImageResource(R.drawable.qiche);
+		
+		}else{
+		
+			x.image().bind(viewholder.car_image,list.getItem(position).getBrand_logo());
+			System.out.println("IIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
+		}
+		viewholder.car_number.setText(list.getItem(position).getCar_num());
+		return convertView;
+	}
+
+}

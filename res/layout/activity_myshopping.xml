@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/orangelight" >
+
+        <ImageView
+            android:id="@+id/img_shangcheng_back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/back" />
+        
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/mall"
+            android:layout_marginLeft="24dp"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+         <ImageView
+            android:id="@+id/img_shangcheng_search"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/search" />
+    </RelativeLayout>
+
+    <RelativeLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:background="@color/white"
+        >
+    
+        <ImageView
+            android:id="@+id/img_baoyang"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/baoyang" />
+
+     <TextView
+         android:id="@+id/tv_baoyang"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/img_baoyang"
+         android:layout_marginLeft="35dp"
+         android:text="@string/baoyang" />
+     
+     
+
+        <ImageView
+          android:id="@+id/img_weixiu"
+          android:layout_toRightOf="@id/img_baoyang"
+          android:layout_marginLeft="25dp"   
+          android:layout_width="60dp"
+          android:layout_marginTop="10dp"
+          android:layout_height="60dp"  
+          android:text="@string/xiche"
+          android:src="@drawable/weixiu"
+            />
+        
+             <TextView
+              android:id="@+id/tv_weixiu"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignLeft="@+id/img_weixiu"
+              android:layout_below="@+id/img_weixiu"
+              android:layout_marginLeft="18dp"
+              android:text="@string/weixiu" />
+        
+         <ImageView
+        android:id="@+id/img_xiche" 
+        android:layout_toRightOf="@id/img_weixiu"
+         android:layout_marginLeft="25dp"   
+        android:layout_width="60dp"
+         android:layout_marginTop="10dp"
+         android:layout_height="60dp" 
+        android:src="@drawable/xiche"
+            />
+         <TextView
+              android:id="@+id/tv_xiche"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignRight="@+id/img_xiche"
+              android:layout_below="@+id/img_xiche"
+              android:layout_marginRight="13dp"
+              android:text="@string/xiche" />
+         
+         <ImageView 
+         android:id="@+id/img_meirong"    
+         android:layout_toRightOf="@id/img_xiche" 
+         android:layout_marginLeft="25dp"
+         android:layout_width="60dp"
+         android:layout_marginTop="10dp"
+         android:layout_height="60dp" 
+         android:src="@drawable/meirong"
+            />
+
+           <TextView
+               android:id="@+id/tv_meirong"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignLeft="@+id/img_meirong"
+               android:layout_below="@+id/img_meirong"
+               android:layout_marginLeft="18dp"
+               android:text="@string/meirong" />
+            
+    </RelativeLayout>
+        <RelativeLayout 
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:background="@color/white"
+        >
+        <ImageView 
+         android:id="@+id/img_luntai"  
+         android:layout_marginLeft="20dp"
+         android:layout_width="60dp"
+         android:layout_height="60dp"  
+         android:layout_marginTop="10dp"
+         android:src="@drawable/luntai"
+            />
+         <TextView
+         android:id="@+id/tv_luntai"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/img_luntai"
+         android:layout_marginLeft="35dp"
+         android:text="@string/luntai" />
+        <ImageView 
+          android:id="@+id/img_peijian"      
+          android:layout_marginLeft="25dp" 
+          android:layout_toRightOf="@id/img_luntai"  
+         android:layout_marginTop="10dp"  
+         android:layout_width="60dp"
+         android:layout_height="60dp"  
+         android:src="@drawable/peijian"
+            />
+        <TextView
+              android:id="@+id/tv_peijian"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignLeft="@+id/img_peijian"
+              android:layout_below="@+id/img_peijian"
+              android:layout_marginLeft="18dp"
+              android:text="@string/peijian" />
+         <ImageView 
+         android:layout_toRightOf="@id/img_peijian"  
+         android:layout_marginTop="10dp"
+         android:id="@+id/img_fuwu"      
+         android:layout_marginLeft="25dp"   
+         android:layout_width="60dp"
+         android:layout_height="60dp" 
+         android:src="@drawable/tehui"
+            />
+      <TextView
+              android:id="@+id/tv_fuwu"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignLeft="@+id/img_fuwu"
+              android:layout_below="@+id/img_fuwu"
+              android:layout_marginLeft="18dp"
+              android:text="@string/fuwu" />
+         
+         <ImageView
+             android:id="@+id/img_youhui"
+             android:layout_width="60dp"
+             android:layout_height="70dp"
+             android:layout_toRightOf="@id/img_fuwu" 
+             android:layout_marginLeft="25dp"
+             android:src="@drawable/youhui" />
+            
+           <TextView
+              android:id="@+id/tv_youhui"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignLeft="@+id/img_youhui"
+              android:layout_below="@+id/img_youhui"
+              android:layout_marginLeft="18dp"
+              android:text="@string/tehui" />
+           
+           
+    </RelativeLayout >
+    <View 
+    android:layout_width="match_parent"
+    android:layout_height="10dp"
+    android:background="@color/white"/>
+
+       <com.handmark.pulltorefresh.library.PullToRefreshListView  
+        xmlns:ptr="http://schemas.android.com/apk/res-auto"  
+        android:id="@+id/refreshlistview"  
+        android:layout_width="match_parent"  
+        android:layout_height="match_parent"  
+        ptr:ptrDrawable="@drawable/default_ptr_flip"   
+        ptr:ptrAnimationStyle="flip"  
+        ptr:ptrHeaderBackground="@color/white"  
+        ptr:ptrHeaderTextColor="@color/textgraydark" 
+        />
+    
+
+</LinearLayout>

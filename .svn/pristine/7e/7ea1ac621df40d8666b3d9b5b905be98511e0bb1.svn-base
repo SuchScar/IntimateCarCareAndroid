@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/orangelight">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/img_baccarshezhi"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/car_configuration"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+         <RelativeLayout 
+    android:id="@+id/rel_changenumber"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:textSize="18sp"
+        android:textColor="@color/textgraydark"
+        android:text="@string/car_pinpai" />
+
+     <TextView
+         android:id="@+id/tv_carpinpai"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentRight="true"
+         android:layout_alignParentTop="true"
+         android:layout_marginRight="18dp"
+         android:text="东风日产"
+         android:textColor="@color/textgraydark"
+         android:textSize="18sp" />
+
+</RelativeLayout>  
+    <View 
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:background="@color/linegray"/> 
+    
+     <RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:textSize="18sp"
+        android:textColor="@color/textgraydark"
+        android:text="@string/chexing" />
+
+     <TextView
+         android:id="@+id/tv_carchexing"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentRight="true"
+         android:layout_alignParentTop="true"
+         android:layout_marginRight="18dp"
+         android:text="奔驰215"
+         android:textColor="@color/textgraydark"
+         android:textSize="18sp" />
+
+</RelativeLayout>  
+    <View 
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:background="@color/linegray"/> 
+    
+       <RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:textSize="18sp"
+        android:textColor="@color/textgraydark"
+        android:text="@string/vinma" />
+
+     <TextView
+         android:id="@+id/tv_vin"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentRight="true"
+         android:layout_alignParentTop="true"
+         android:layout_marginRight="18dp"
+         android:text="LGBL2ARFGDGAS"
+         android:textColor="@color/textgraydark"
+         android:textSize="18sp" />
+
+</RelativeLayout>  
+    <View 
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:background="@color/linegray"/> 
+    
+         <RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:textSize="18sp"
+        android:textColor="@color/textgraydark"
+        android:text="@string/biansuxiang" />
+
+     <TextView
+         android:id="@+id/tv_bianshuxiang"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentRight="true"
+         android:layout_alignParentTop="true"
+         android:layout_marginRight="18dp"
+         android:text="自动档"
+         android:textColor="@color/textgraydark"
+         android:textSize="18sp" />
+
+</RelativeLayout>  
+    <View 
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:background="@color/linegray"/> 
+    
+          <RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:textSize="18sp"
+        android:textColor="@color/textgraydark"
+        android:text="@string/pailiang" />
+
+     <TextView
+         android:id="@+id/tv_pailiang"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentRight="true"
+         android:layout_alignParentTop="true"
+         android:layout_marginRight="18dp"
+         android:text="2.0L"
+         android:textColor="@color/textgraydark"
+         android:textSize="18sp" />
+
+</RelativeLayout>  
+    <View 
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:background="@color/linegray"/> 
+           <RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:textSize="18sp"
+        android:textColor="@color/textgraydark"
+        android:text="@string/niankuan" />
+
+     <TextView
+         android:id="@+id/tv_niankuan"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentRight="true"
+         android:layout_alignParentTop="true"
+         android:layout_marginRight="18dp"
+         android:text="2013"
+         android:textColor="@color/textgraydark"
+         android:textSize="18sp" />
+
+</RelativeLayout>  
+    <View 
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:background="@color/linegray"/> 
+       <RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:textSize="18sp"
+        android:textColor="@color/textgraydark"
+        android:text="@string/buyjine" />
+
+ <EditText
+        android:id="@+id/edt_jine"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="24dp"
+        android:text="0.00"
+        android:background="@drawable/pailiang"
+        android:textSize="15dp"
+       />
+  <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:textSize="18sp"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/textgraydark"
+        android:text="L" />
+</RelativeLayout>  
+    <View 
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:background="@color/linegray"/> 
+          <RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:textSize="18sp"
+        android:textColor="@color/textgraydark"
+        android:text="@string/newlicheng" />
+
+ <EditText
+     android:id="@+id/edt_licheng"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="40dp"
+        android:text="43.114.0"
+        android:background="@drawable/pailiang"
+        android:textSize="15dp"
+       />
+  <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:textSize="18sp"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/textgraydark"
+        android:text="KM" />
+</RelativeLayout>  
+    <View 
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:background="@color/linegray"/> 
+    
+    <TextView
+          android:id="@+id/changeshezhi"
+           android:layout_marginTop="20dp" 
+           android:layout_marginLeft="20dp"
+           android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/orangedark"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:text="@string/change_carpeizhi" />
+</LinearLayout>

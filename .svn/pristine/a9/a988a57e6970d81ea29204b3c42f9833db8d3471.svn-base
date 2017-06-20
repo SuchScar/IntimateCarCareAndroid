@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/orangelight" >
+    
+        <ImageView
+            android:id="@+id/img_shangcheng_back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/shangpin"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+  
+    </RelativeLayout>
+    <RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+     android:orientation="horizontal"
+     android:background="@drawable/auto"
+    >
+     <TextView 
+     android:id="@+id/carname_shopitem"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="路虎发现"
+    android:textSize="15dp"
+    android:textColor="@color/orangelight"
+    android:layout_marginLeft="15dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+         />    
+    <TextView 
+    android:id="@+id/car_km_shopitem"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="9500KM"
+    android:textSize="15dp"
+   android:layout_alignParentRight="true"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+         />  
+  </RelativeLayout >
+
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/auto"
+      >
+
+      <ImageView
+          android:id="@+id/shangjia_image"
+          android:layout_width="0dp"
+          android:layout_height="100dp"
+          android:layout_weight="42"
+          android:src="@drawable/shangpinabove" />
+
+      <RelativeLayout
+          android:layout_width="0dp"
+          android:layout_height="106dp"
+          android:layout_weight="50" >
+
+          <TextView
+              android:id="@+id/tv_shangpinname"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="5dp"
+              android:text="奥迪轮胎"
+              android:textSize="17dp"
+           />
+
+          <TextView
+              android:id="@+id/shoping_priveo"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignLeft="@+id/tv_shangpinname"
+              android:layout_below="@+id/tv_shangpinname"
+              android:text="价格："
+              android:textColor="@color/textgraydark" />
+
+          <TextView
+              android:id="@+id/shoping_prive"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/tv_shangpinname"
+              android:layout_toRightOf="@id/shoping_priveo"
+              android:text="800元"
+              android:textColor="@color/textgraydark" />
+
+          <TextView
+              android:id="@+id/shangjia_nameo"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignLeft="@+id/tv_shangpinname"
+              android:layout_below="@+id/shoping_prive"
+              android:text="商家名称："
+              android:textColor="@color/textgraydark" />
+
+          <TextView
+              android:id="@+id/shangjia_name"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/shoping_prive"
+              android:layout_toRightOf="@+id/shangjia_nameo"
+              android:text="万里汽修厂"
+              android:textColor="@color/textgraydark" />
+          
+                 <TextView
+              android:id="@+id/shangjia_telo"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignLeft="@+id/tv_shangpinname"
+              android:layout_below="@+id/shangjia_name"
+              android:text="商家电话："
+              android:textColor="@color/textgraydark" />
+
+          <TextView
+              android:id="@+id/shangjia_tel"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/shangjia_name"
+              android:layout_toRightOf="@+id/shangjia_telo"
+              android:text="8208820"
+              android:textColor="@color/textgraydark" />
+          
+                   <TextView
+              android:id="@+id/shangjia_addresso"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignLeft="@+id/tv_shangpinname"
+              android:layout_below="@+id/shangjia_tel"
+              android:text="商家地址："
+              android:textColor="@color/textgraydark" />
+
+          <TextView
+              android:id="@+id/shangjia_address"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/shangjia_tel"
+              android:layout_toRightOf="@+id/shangjia_addresso"
+              android:text="白云二村"
+              android:textColor="@color/textgraydark" />
+          
+      </RelativeLayout>
+  
+    
+  </LinearLayout>
+       <RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+       >
+    <TextView
+    android:id="@+id/tv_abstrb"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingLeft="20dp" 
+    android:paddingRight="20dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:text="这是一个富有魔力的轮胎，他不怕水 不怕火，能深度潜水，能快速灭火，有了他再也不用担心你不是个老司机！"
+        />   
+       
+   </RelativeLayout >
+</LinearLayout>

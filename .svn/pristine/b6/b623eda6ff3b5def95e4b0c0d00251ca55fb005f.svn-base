@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/orangelight" >
+    
+        <ImageView
+            android:id="@+id/img_shangcheng_back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/shangjia"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+  
+    </RelativeLayout>
+    <RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+     android:orientation="horizontal"
+    >
+     <TextView 
+     android:id="@+id/carname_shopitem"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="路虎发现"
+    android:textSize="15dp"
+    android:textColor="@color/orangelight"
+    android:layout_marginLeft="15dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+         />    
+    <TextView 
+    android:id="@+id/car_km_shopitem"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="9500KM"
+    android:textSize="15dp"
+   android:layout_alignParentRight="true"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+         />  
+  </RelativeLayout >
+  <View 
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="@color/orangelight"
+      />
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+      >
+      <TextView 
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+    android:text="@string/shangjiajieshao" 
+    android:layout_centerInParent="true"
+          />
+   
+  </RelativeLayout>
+    <View 
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="@color/textgraylight"
+      />  
+  <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/auto"
+      >
+
+      <ImageView
+          android:id="@+id/shangjia_image"
+          android:layout_width="0dp"
+          android:layout_height="100dp"
+          android:layout_weight="42"
+          android:src="@drawable/shangpin_image" />
+
+      <RelativeLayout
+          android:layout_width="0dp"
+          android:layout_height="106dp"
+          android:layout_weight="43.02" >
+
+          <TextView
+              android:id="@+id/tv_shangjianame_detail"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="15dp"
+              android:text="万里汽修"
+              android:textSize="17dp"
+           />
+
+          <TextView
+              android:id="@+id/address_detail"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignLeft="@+id/tv_shangjianame_detail"
+              android:layout_below="@+id/tv_shangjianame_detail"
+              android:text="地址："
+              android:textColor="@color/textgraydark" />
+
+          <TextView
+              android:id="@+id/shangjia_address_detail"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/tv_shangjianame_detail"
+              android:layout_toRightOf="@id/address_detail"
+              android:text="环城北路环城北路环城北路"
+              android:textColor="@color/textgraydark" />
+
+          <TextView
+              android:id="@+id/call1_shangjia_detail"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignLeft="@+id/tv_shangjianame_detail"
+              android:layout_below="@+id/shangjia_address_detail"
+              android:text="电话："
+              android:textColor="@color/textgraydark" />
+
+          <TextView
+              android:id="@+id/call_shangjia_detail"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/shangjia_address_detail"
+              android:layout_toRightOf="@+id/call1_shangjia_detail"
+              android:text="8787777777"
+              android:textColor="@color/textgraydark" />
+          
+      </RelativeLayout>
+  
+    <RelativeLayout 
+    android:id="@+id/rel_baidumap"
+    android:layout_width="0dp"
+    android:layout_weight="24"
+    android:layout_height="100dp"
+        >
+     <View   
+    android:layout_width="1dp"
+    android:layout_height="match_parent" 
+    android:background="@color/textgraylight"
+         />     
+        
+    <ImageView 
+    android:id="@+id/img_daohang"
+    android:layout_width="30dp"
+    android:layout_height="30dp" 
+    android:src="@drawable/dingwei"
+   android:layout_centerHorizontal="true"
+   android:layout_marginTop="20dp"
+    
+        />    
+   <TextView 
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/img_daohang"  
+    android:layout_marginLeft="10dp"
+    android:text="导航前往"
+    android:layout_marginTop="7dp"
+    
+       />     
+    </RelativeLayout>
+  </LinearLayout>    
+   <RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+       >
+    <TextView
+    android:id="@+id/description"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingLeft="20dp" 
+    android:paddingRight="20dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:text="商家介绍商家介绍商家介绍商家介绍商家介绍商家介绍商家介绍商家介绍商家介绍商家介绍商家介绍商家介绍"
+        />   
+       
+   </RelativeLayout >
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent" >
+
+       <View
+           android:layout_width="match_parent"
+           android:layout_height="2dp"
+          android:layout_marginBottom="45dp"
+             android:layout_alignParentBottom="true"
+           android:background="@color/textgraylight" />
+
+       <TextView
+           android:id="@+id/textView1"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_alignParentBottom="true"
+           android:layout_centerHorizontal="true"
+          
+           android:paddingBottom="8dp"
+           android:text="@string/shangjiadianhua"
+           android:textSize="18dp" />
+
+       <ImageView
+           android:id="@+id/shangjiadetail_dianhua"
+           android:layout_width="25dp"
+           android:layout_height="25dp"
+           android:layout_alignTop="@+id/textView1"
+           android:layout_toLeftOf="@+id/textView1"
+           android:paddingBottom="5dp"
+           android:src="@drawable/dianhua" />
+
+   </RelativeLayout>
+ 
+</LinearLayout>

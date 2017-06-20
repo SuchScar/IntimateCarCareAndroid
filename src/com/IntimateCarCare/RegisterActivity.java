@@ -1,0 +1,144 @@
+package com.IntimateCarCare;
+
+import java.util.HashMap;
+
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.Bll.CBLL;
+import com.Entity.UserEntity;
+import com.Http.HttpCallback;
+import com.Http.HttpTask;
+import com.tool.JSONEntity;
+import com.tool.LoadingDialog;
+import com.tool.MyURL;
+import com.tool.ToastUtil;
+
+public class RegisterActivity extends Activity{
+
+	private ImageView img_back;
+	private EditText et_useraccount,et_userpassword;
+	private LinearLayout lin_register;
+	private TextView tv_login;
+	
+	private LoadingDialog dialog;
+	
+	
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.activity_register);
+	
+		initView();
+		setListen();
+		
+		
+		
+	
+	}
+
+
+
+	private void initView() {
+		// TODO Auto-generated method stub
+		img_back=(ImageView) findViewById(R.id.img_back);
+		et_useraccount=(EditText) findViewById(R.id.et_useraccount);
+		et_userpassword=(EditText) findViewById(R.id.et_userpassword);
+		lin_register=(LinearLayout) findViewById(R.id.lin_register);
+		tv_login=(TextView) findViewById(R.id.tv_login);
+		
+		
+		
+		
+	}
+
+
+
+	private void setListen() {
+		// TODO Auto-generated method stub
+		img_back.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				finish();
+			}
+		});
+		
+		tv_login.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				finish();
+			}
+		});
+		
+		lin_register.setOnClickListener(new OnClickListener() {
+			
+			@SuppressWarnings("unchecked")
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				String account,passward;
+				account=et_useraccount.getText().toString();
+				passward=et_userpassword.getText().toString();
+				if(account.isEmpty() || passward.isEmpty()){
+					ToastUtil.show(RegisterActivity.this,"账户或密码不能为空");
+				}else{
+					HashMap<String, String>register=UserEntity.toRegisterJson(account,passward);
+					
+					new HttpTask(RegisterCallback, MyURL.REGISTER,RegisterActivity.this).execute(register);
+					dialog = new LoadingDialog(RegisterActivity.this, R.layout.view_tips_loading);
+					dialog.setCancelable(true);
+					dialog.setCanceledOnTouchOutside(false);
+					dialog.show();
+					
+				}
+				
+			}
+		});
+		
+	}
+	
+	
+	//注册callback
+	HttpCallback RegisterCallback=new HttpCallback() {
+		
+		@Override
+		public void getResult(JSONObject json) {
+			// TODO Auto-generated method stub
+			dialog.dismiss();
+			CBLL cBllUser = CBLL.getInstance();
+			JSONEntity entity = cBllUser.json2register(json);
+			
+			if(entity.isFlag()){
+				ToastUtil.show(RegisterActivity.this, "注册成功");
+				finish();
+				
+			}else{
+				if(entity.getMessage()==MyURL.MSG_YETERGISTER_ERROR){
+					ToastUtil.show(RegisterActivity.this, "该账户已注册");
+				}else{
+				ToastUtil.show(RegisterActivity.this, "注册失败");
+				}
+			}
+		}
+	};
+	
+	
+	
+	
+}
